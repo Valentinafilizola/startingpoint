@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Starting Point — Seattle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Instrument+Serif:ital@0;1&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,600&family=Epilogue:wght@400;500&display=swap" rel="stylesheet"/>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --ink:       #1e1208;
+  --bark:      #4a2810;
+  --rust:      #b84a1a;
+  --ember:     #d4622a;
+  --ochre:     #c8882a;
+  --straw:     #e8c87a;
+  --cream:     #f7f0e4;
+  --paper:     #faf6ee;
+  --warm-mid:  #8a6040;
+  --sage:      #5a6e48;
+  --sage-light:#e8edd8;
+}
+
+html { scroll-behavior:smooth }
+
+body {
+  font-family:'Epilogue',sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x:hidden;
+  cursor: default;
+}
+
+/* grain texture overlay */
+body::before {
+  content:'';
+  position:fixed;inset:0;z-index:999;
+  pointer-events:none;
+  opacity:0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── NAV ── */
+nav {
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(1.5rem,5vw,3.5rem);
+  height:64px;
+  background:rgba(250,246,238,0.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(74,40,16,0.1);
+}
+
+.nav-wordmark {
+  /* ─── WORDMARK SLOT ───────────────────────────────────────
+     Replace this entire element with:
+     <img src="your-wordmark.svg" alt="Starting Point" style="height:32px;">
+  ─────────────────────────────────────────────────────── */
+  border:1.5px dashed var(--ochre);
+  border-radius:4px;
+  padding:6px 16px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ochre);opacity:.7;
+  white-space:nowrap;
+}
+
+.nav-right { display:flex;align-items:center;gap:2.5rem }
+.nav-right a {
+  font-size:14px;font-weight:500;letter-spacing:.02em;
+  color:var(--warm-mid);text-decoration:none;
+  transition:color .2s;
+}
+.nav-right a:hover { color:var(--rust) }
+.nav-join {
+  background:var(--rust);color:#fff !important;
+  padding:9px 20px;border-radius:100px;
+  font-size:14px;
+  transition:background .2s,transform .15s !important;
+}
+.nav-join:hover { background:var(--bark) !important;transform:translateY(-1px) }
+
+/* ── HERO ── */
+.hero {
+  min-height:96vh;
+  padding: 6vw clamp(1.5rem,5vw,3.5rem) 4vw;
+  display:grid;
+  grid-template-columns:1.1fr 0.9fr;
+  gap:3rem;
+  align-items:center;
+  position:relative;
+}
+
+/* big decorative number */
+.hero-bg-num {
+  position:absolute;
+  right:-0.05em; top: -0.1em;
+  font-family:'Fraunces',serif;
+  font-size:clamp(18rem,30vw,34rem);
+  font-weight:600;
+  color:rgba(200,136,42,0.055);
+  line-height:1;
+  pointer-events:none;
+  user-select:none;
+  letter-spacing:-0.04em;
+}
+
+.hero-left { position:relative;z-index:1 }
+
+.eyebrow {
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--rust);margin-bottom:2rem;
+}
+.eyebrow-dot {
+  width:6px;height:6px;border-radius:50%;
+  background:var(--rust);flex-shrink:0;
+}
+
+.hero h1 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(3.6rem,7vw,7.5rem);
+  font-weight:600;
+  line-height:.95;
+  letter-spacing:-.03em;
+  color:var(--ink);
+  margin-bottom:2rem;
+}
+
+.hero h1 .script {
+  font-style:italic;
+  font-weight:300;
+  color:var(--rust);
+  display:block;
+  font-size:1.1em;
+}
+
+.hero-desc {
+  font-size:clamp(1rem,1.4vw,1.15rem);
+  line-height:1.8;
+  color:var(--warm-mid);
+  max-width:46ch;
+  margin-bottom:2.75rem;
+}
+
+.hero-actions { display:flex;gap:1rem;flex-wrap:wrap;align-items:center }
+
+.btn-fill {
+  display:inline-block;
+  background:var(--rust);color:#fff;
+  padding:15px 32px;border-radius:100px;
+  font-size:15px;font-weight:500;letter-spacing:.01em;
+  text-decoration:none;
+  transition:background .2s,transform .2s;
+  border:2px solid transparent;
+}
+.btn-fill:hover { background:var(--bark);transform:translateY(-2px) }
+
+.btn-line {
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--rust);
+  padding:13px 22px;border-radius:100px;
+  font-size:15px;font-weight:500;
+  text-decoration:none;
+  border:2px solid rgba(184,74,26,.25);
+  transition:border-color .2s,background .2s;
+}
+.btn-line:hover { border-color:var(--rust);background:rgba(184,74,26,.05) }
+
+/* sticker */
+.sticker {
+  position:absolute;
+  bottom:-2rem;right:1rem;
+  width:100px;height:100px;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+}
+.sticker svg { position:absolute;inset:0;animation:spin 20s linear infinite }
+@keyframes spin { to{transform:rotate(360deg)} }
+.sticker-inner {
+  font-family:'Fraunces',serif;
+  font-size:10px;font-weight:600;
+  font-style:italic;
+  color:var(--rust);
+  line-height:1.3;
+  z-index:1;
+  max-width:60px;
+}
+
+/* ── HERO RIGHT / VIDEO ── */
+.hero-right { position:relative;z-index:1 }
+
+.video-frame {
+  position:relative;
+  border-radius:4px 40px 4px 40px; /* asymmetric — feels handmade */
+  overflow:hidden;
+  aspect-ratio:4/5;
+  background:var(--cream);
+  box-shadow:
+    8px 8px 0 var(--straw),
+    16px 16px 0 rgba(200,136,42,.15);
+  transform:rotate(1.2deg);
+  transition:transform .4s;
+}
+.video-frame:hover { transform:rotate(0deg) }
+
+/* ── VIDEO PLACEHOLDER ──────────────────────────────────────────────
+   Replace .video-inner contents with:
+
+   Self-hosted:
+     <video src="your-video.mp4" poster="thumb.jpg" controls
+            style="width:100%;height:100%;object-fit:cover;display:block">
+     </video>
+
+   YouTube embed:
+     <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0"
+             title="Starting Point — our story" frameborder="0"
+             allowfullscreen
+             style="width:100%;height:100%;display:block;border:none">
+     </iframe>
+
+   Vimeo embed:
+     <iframe src="https://player.vimeo.com/video/VIDEO_ID"
+             title="Starting Point" frameborder="0"
+             allowfullscreen
+             style="width:100%;height:100%;display:block;border:none">
+     </iframe>
+────────────────────────────────────────────────────────────────── -->
+.video-inner {
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:1.25rem;
+  background:linear-gradient(160deg,#b84a1a 0%,#d4622a 55%,#c8882a 100%);
+  color:#fff;cursor:pointer;
+  transition:opacity .2s;
+}
+.video-inner:hover { opacity:.93 }
+
+.play-ring {
+  width:76px;height:76px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.55);
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.12);
+  transition:background .2s,transform .2s;
+}
+.video-inner:hover .play-ring { background:rgba(255,255,255,.22);transform:scale(1.06) }
+
+.video-label {
+  font-family:'Fraunces',serif;
+  font-size:1.15rem;font-style:italic;font-weight:300;
+  opacity:.88;text-align:center;padding:0 2rem;
+}
+.video-sub { font-size:12px;opacity:.6;letter-spacing:.08em;text-transform:uppercase }
+
+/* handwritten-feeling caption */
+.video-caption {
+  margin-top:1.5rem;
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:.95rem;
+  color:var(--warm-mid);
+  transform:rotate(-1.5deg);
+  display:block;
+  text-align:center;
+}
+
+/* ── MARQUEE STRIP ── */
+.marquee-strip {
+  background:var(--rust);
+  color:#fff;
+  overflow:hidden;
+  padding:14px 0;
+  white-space:nowrap;
+  position:relative;
+}
+.marquee-track {
+  display:inline-flex;
+  animation:marquee 28s linear infinite;
+}
+.marquee-track span {
+  font-family:'Fraunces',serif;
+  font-size:1.1rem;font-style:italic;font-weight:300;
+  padding:0 2.5rem;
+  opacity:.92;
+}
+.marquee-track .dot { font-style:normal;opacity:.5 }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── ABOUT ── */
+.about {
+  padding: clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,3.5rem);
+  display:grid;
+  grid-template-columns:0.45fr 0.55fr;
+  gap:5rem;
+  align-items:start;
+}
+
+.about-left { position:relative }
+
+/* rotated label */
+.rotated-label {
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;
+  color:var(--ochre);
+  position:absolute;left:-2.5rem;top:0;
+  height:100%;
+  display:flex;align-items:center;
+  user-select:none;
+}
+
+.about-num {
+  font-family:'Fraunces',serif;
+  font-size:clamp(6rem,12vw,12rem);
+  font-weight:600;
+  color:rgba(200,136,42,.12);
+  line-height:1;
+  margin-bottom:-1.5rem;
+  letter-spacing:-.04em;
+}
+
+.about-pull {
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.8rem,3.5vw,3rem);
+  font-weight:300;
+  font-style:italic;
+  line-height:1.25;
+  color:var(--ink);
+  margin-bottom:2rem;
+}
+.about-pull strong { font-weight:600;font-style:normal;color:var(--rust) }
+
+.about-body {
+  font-size:1.05rem;line-height:1.9;
+  color:var(--warm-mid);
+  margin-bottom:1.75rem;
+}
+
+.hand-underline {
+  display:inline;
+  background:linear-gradient(to right,var(--straw),var(--straw));
+  background-size:100% 35%;
+  background-position:0 85%;
+  background-repeat:no-repeat;
+}
+
+.about-right { padding-top:3rem }
+
+/* the big statement block */
+.statement-block {
+  background:var(--ink);
+  border-radius:2px 32px 2px 32px;
+  padding:2.5rem 2.25rem;
+  margin-bottom:2rem;
+  position:relative;
+  overflow:hidden;
+}
+.statement-block::before {
+  content:'';
+  position:absolute;top:-40%;right:-20%;
+  width:280px;height:280px;border-radius:50%;
+  background:rgba(200,136,42,.08);
+  pointer-events:none;
+}
+.statement-block p {
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.2rem,2vw,1.6rem);
+  font-style:italic;font-weight:300;
+  line-height:1.55;
+  color:var(--straw);
+  position:relative;z-index:1;
+}
+.statement-block cite {
+  display:block;margin-top:1.25rem;
+  font-family:'Epilogue',sans-serif;
+  font-style:normal;font-size:.85rem;
+  color:rgba(232,200,122,.45);
+  letter-spacing:.06em;text-transform:uppercase;
+}
+
+/* tag cluster */
+.tag-cluster { display:flex;flex-wrap:wrap;gap:8px }
+.tc {
+  font-size:13px;font-weight:500;
+  padding:7px 16px;border-radius:100px;
+  letter-spacing:.01em;
+  transition:transform .2s;cursor:default;
+}
+.tc:hover { transform:scale(1.05) }
+.tc-r { background:rgba(184,74,26,.1);color:var(--rust) }
+.tc-o { background:rgba(200,136,42,.14);color:#7a5010 }
+.tc-g { background:rgba(90,110,72,.12);color:var(--sage) }
+
+/* ── HOW ── */
+.how {
+  background:var(--ink);
+  padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,3.5rem);
+  position:relative;
+  overflow:hidden;
+}
+
+.how::before {
+  content:'';
+  position:absolute;bottom:-10%;left:-10%;
+  width:500px;height:500px;border-radius:50%;
+  background:rgba(184,74,26,.07);pointer-events:none;
+}
+
+.how-header {
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:3rem;align-items:end;
+  margin-bottom:clamp(3rem,6vw,5rem);
+}
+
+.how-label {
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:500;color:var(--ochre);margin-bottom:1rem;
+}
+
+.how h2 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.2rem,4vw,4rem);
+  font-weight:600;font-style:italic;
+  line-height:1.05;letter-spacing:-.02em;
+  color:var(--cream);
+}
+.how h2 em { font-style:normal;color:var(--straw) }
+
+.how-intro {
+  font-size:1rem;line-height:1.8;
+  color:rgba(247,240,228,.55);
+  align-self:end;padding-bottom:.25rem;
+}
+
+/* steps as a horizontal timeline-ish row */
+.steps {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.step {
+  background:var(--ink);
+  padding:2.25rem 1.75rem 2.5rem;
+  position:relative;
+  transition:background .3s;
+}
+.step:hover { background:#2a180a }
+
+.step-seq {
+  font-family:'Fraunces',serif;
+  font-size:3.5rem;font-weight:600;
+  color:rgba(200,136,42,.18);
+  line-height:1;margin-bottom:.75rem;
+  letter-spacing:-.03em;
+}
+
+.step-glyph {
+  font-size:1.6rem;margin-bottom:1rem;
+  display:block;
+}
+
+.step h3 {
+  font-family:'Lora',serif;
+  font-size:1.05rem;font-weight:600;
+  color:var(--straw);margin-bottom:.6rem;
+  line-height:1.3;
+}
+
+.step p {
+  font-size:.9rem;line-height:1.75;
+  color:rgba(247,240,228,.5);
+}
+
+.step-divider {
+  position:absolute;right:0;top:10%;bottom:10%;
+  width:1px;background:rgba(255,255,255,.06);
+}
+
+/* ── FEELINGS ── */
+.feelings {
+  padding:clamp(5rem,9vw,8rem) clamp(1.5rem,5vw,3.5rem);
+  position:relative;
+}
+
+/* organic background blob */
+.feelings::before {
+  content:'';
+  position:absolute;
+  top:10%;right:-5%;
+  width:clamp(300px,45vw,600px);
+  height:clamp(300px,45vw,600px);
+  border-radius:62% 38% 55% 45% / 40% 60% 40% 60%;
+  background:rgba(232,200,122,.09);
+  pointer-events:none;
+}
+
+.feelings-header {
+  max-width:60ch;margin-bottom:clamp(3rem,6vw,5rem);
+}
+
+.feelings-label {
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:500;color:var(--rust);margin-bottom:1rem;
+}
+
+.feelings h2 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4vw,3.6rem);
+  font-weight:300;font-style:italic;
+  line-height:1.1;letter-spacing:-.02em;
+  color:var(--ink);
+}
+.feelings h2 strong {
+  font-weight:600;font-style:normal;
+  display:block;color:var(--rust);
+}
+
+/* scattered word cloud — each word is absolutely positioned for scatter look, 
+   but fallback to flex wrap for accessibility / narrow screens */
+.word-field {
+  position:relative;
+  height:380px;
+  margin:0 auto;
+}
+
+.word {
+  position:absolute;
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:300;
+  color:var(--ink);
+  opacity:.85;
+  transition:opacity .2s,transform .2s;
+  cursor:default;
+  line-height:1;
+  white-space:nowrap;
+}
+.word:hover { opacity:1;transform:scale(1.07) !important }
+
+/* individual word placements — varied size, rotation, position */
+.w1  { font-size:clamp(2rem,4vw,4rem);    top:0%;   left:4%;   transform:rotate(-2deg);   color:var(--rust) }
+.w2  { font-size:clamp(1rem,2vw,1.6rem);  top:5%;   left:42%;  transform:rotate(1.5deg);  color:var(--warm-mid) }
+.w3  { font-size:clamp(1.5rem,3vw,2.8rem);top:2%;   left:65%;  transform:rotate(-1deg);   color:var(--ochre) }
+.w4  { font-size:clamp(1rem,1.8vw,1.5rem);top:22%;  left:2%;   transform:rotate(2deg);    color:var(--sage) }
+.w5  { font-size:clamp(2.2rem,4.5vw,4.5rem);top:18%;left:22%;  transform:rotate(-1.5deg); color:var(--ink);font-weight:600;font-style:normal }
+.w6  { font-size:clamp(.9rem,1.5vw,1.3rem);top:28%; left:72%;  transform:rotate(2.5deg);  color:var(--warm-mid) }
+.w7  { font-size:clamp(1.4rem,2.5vw,2.2rem);top:40%;left:5%;   transform:rotate(-3deg);   color:var(--rust) }
+.w8  { font-size:clamp(.85rem,1.3vw,1.2rem);top:42%;left:35%;  transform:rotate(1deg);    color:var(--sage);opacity:.7 }
+.w9  { font-size:clamp(1.8rem,3.5vw,3.2rem);top:44%;left:55%;  transform:rotate(-2deg);   color:var(--ochre) }
+.w10 { font-size:clamp(.85rem,1.4vw,1.25rem);top:58%;left:2%;  transform:rotate(1.5deg);  color:var(--warm-mid);opacity:.7 }
+.w11 { font-size:clamp(2rem,3.8vw,3.5rem);top:58%;  left:22%;  transform:rotate(-1deg);   color:var(--ink) }
+.w12 { font-size:clamp(.9rem,1.5vw,1.3rem);top:60%;  left:65%;  transform:rotate(3deg);    color:var(--rust);opacity:.8 }
+.w13 { font-size:clamp(1.6rem,3vw,2.6rem);top:74%;  left:8%;   transform:rotate(-2.5deg); color:var(--sage) }
+.w14 { font-size:clamp(.9rem,1.6vw,1.4rem);top:78%;  left:42%;  transform:rotate(1deg);    color:var(--warm-mid);opacity:.75 }
+.w15 { font-size:clamp(1.2rem,2.2vw,2rem);top:80%;  left:65%;  transform:rotate(-1.5deg); color:var(--ochre) }
+
+.feelings-note {
+  margin-top:3rem;
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:1rem;
+  color:var(--warm-mid);
+  max-width:52ch;
+  line-height:1.75;
+  padding-left:1.5rem;
+  border-left:2px solid var(--straw);
+}
+
+/* ── VALUES ── */
+.values {
+  background:var(--cream);
+  padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,3.5rem);
+}
+
+.values-top {
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:end;
+  margin-bottom:clamp(3rem,6vw,5rem);
+  padding-bottom:clamp(3rem,6vw,5rem);
+  border-bottom:1px solid rgba(74,40,16,.1);
+}
+
+.values-label {
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:500;color:var(--rust);margin-bottom:1rem;
+}
+
+.values h2 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.2rem,4vw,3.8rem);
+  font-weight:600;letter-spacing:-.03em;
+  line-height:1;
+  color:var(--ink);
+}
+
+.values-intro {
+  font-size:1rem;line-height:1.85;
+  color:var(--warm-mid);
+  align-self:end;
+}
+
+/* value cards — horizontal scrolling on mobile, grid on desktop */
+.values-grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1.5rem;
+}
+
+.value-card {
+  padding:2rem 1.5rem;
+  border:1px solid rgba(74,40,16,.1);
+  border-radius:16px;
+  background:#fff;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+  cursor:default;
+}
+.value-card:hover {
+  transform:translateY(-6px) rotate(-0.5deg);
+  box-shadow:0 16px 40px rgba(74,40,16,.1);
+  border-color:rgba(184,74,26,.2);
+}
+
+.value-glyph { font-size:2rem;display:block;margin-bottom:1.25rem }
+
+.value-card h3 {
+  font-family:'Fraunces',serif;
+  font-size:1.25rem;font-weight:600;font-style:italic;
+  color:var(--rust);
+  margin-bottom:.75rem;line-height:1.1;
+}
+
+.value-card p {
+  font-size:.9rem;line-height:1.75;color:var(--warm-mid);
+}
+
+/* ── MEMBERSHIP ── */
+.membership {
+  padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,3.5rem);
+  position:relative;
+}
+
+.membership-label {
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:500;color:var(--rust);margin-bottom:1rem;
+}
+
+.membership h2 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.2rem,4vw,3.8rem);
+  font-weight:300;font-style:italic;
+  line-height:1.1;letter-spacing:-.02em;
+  color:var(--ink);
+  margin-bottom:.75rem;
+}
+.membership h2 strong { font-weight:600;color:var(--rust);font-style:normal }
+
+.membership-sub {
+  font-size:1.05rem;line-height:1.8;
+  color:var(--warm-mid);max-width:52ch;
+  margin-bottom:clamp(2.5rem,5vw,4rem);
+}
+
+.mem-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:1.5rem;
+  margin-bottom:2.5rem;
+}
+
+.mem-card {
+  border-radius:20px;
+  padding:2.5rem 2rem;
+  position:relative;overflow:hidden;
+}
+
+.mc-free {
+  background:#fff;
+  border:1px solid rgba(74,40,16,.1);
+}
+.mc-member {
+  background:var(--rust);
+  border:1px solid transparent;
+}
+.mc-donate {
+  background:var(--ink);
+  border:1px solid transparent;
+}
+
+.mc-tag {
+  display:inline-block;
+  font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 12px;border-radius:100px;
+  margin-bottom:1.5rem;
+}
+.mc-free .mc-tag  { background:rgba(184,74,26,.1);color:var(--rust) }
+.mc-member .mc-tag{ background:rgba(255,255,255,.2);color:#fff }
+.mc-donate .mc-tag{ background:rgba(200,136,42,.2);color:var(--straw) }
+
+.mc-price {
+  font-family:'Fraunces',serif;
+  font-size:3rem;font-weight:600;
+  line-height:1;margin-bottom:.35rem;
+}
+.mc-free .mc-price   { color:var(--ink) }
+.mc-member .mc-price { color:#fff }
+.mc-donate .mc-price { color:var(--straw);font-size:2rem;font-weight:300;font-style:italic }
+
+.mc-qualifier {
+  font-size:.85rem;margin-bottom:1.5rem;
+}
+.mc-free .mc-qualifier   { color:var(--warm-mid) }
+.mc-member .mc-qualifier { color:rgba(255,255,255,.6) }
+.mc-donate .mc-qualifier { color:rgba(232,200,122,.5) }
+
+.mc-body {
+  font-size:.92rem;line-height:1.75;margin-bottom:1.5rem;
+}
+.mc-free .mc-body   { color:var(--warm-mid) }
+.mc-member .mc-body { color:rgba(255,255,255,.8) }
+.mc-donate .mc-body { color:rgba(247,240,228,.6) }
+
+.mc-list { list-style:none;display:flex;flex-direction:column;gap:.6rem }
+.mc-list li {
+  font-size:.88rem;display:flex;align-items:flex-start;gap:8px;
+}
+.mc-free .mc-list li   { color:var(--warm-mid) }
+.mc-member .mc-list li { color:rgba(255,255,255,.75) }
+.mc-donate .mc-list li { color:rgba(247,240,228,.55) }
+
+.mc-bullet {
+  font-size:.75rem;margin-top:.3rem;flex-shrink:0;
+}
+.mc-free .mc-bullet   { color:var(--straw) }
+.mc-member .mc-bullet { color:rgba(232,200,122,.7) }
+.mc-donate .mc-bullet { color:rgba(200,136,42,.6) }
+
+.mem-footer {
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:1rem;
+  color:var(--warm-mid);
+  text-align:center;
+  line-height:1.7;
+}
+.mem-footer a { color:var(--rust);text-underline-offset:3px }
+
+/* ── BIG CTA ── */
+.cta {
+  margin:0 clamp(1rem,3vw,2.5rem) clamp(2rem,4vw,3rem);
+  background:var(--rust);
+  border-radius:4px 36px 4px 36px;
+  padding:clamp(3.5rem,7vw,6rem) clamp(2rem,5vw,4rem);
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:3rem;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.cta::before {
+  content:'';
+  position:absolute;top:-30%;right:-10%;
+  width:400px;height:400px;border-radius:50%;
+  background:rgba(255,255,255,.06);pointer-events:none;
+}
+
+.cta h2 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4vw,3.8rem);
+  font-weight:300;font-style:italic;
+  line-height:1.1;letter-spacing:-.02em;
+  color:#fff;
+}
+.cta h2 strong { font-weight:600;font-style:normal;color:var(--straw) }
+
+.cta-sub {
+  font-size:1rem;line-height:1.75;
+  color:rgba(255,255,255,.65);
+  margin-top:1rem;max-width:44ch;
+}
+
+.cta-right { display:flex;flex-direction:column;gap:1rem;align-items:flex-end;flex-shrink:0 }
+
+.btn-white {
+  display:inline-block;
+  background:#fff;color:var(--rust);
+  padding:15px 28px;border-radius:100px;
+  font-size:15px;font-weight:500;
+  text-decoration:none;white-space:nowrap;
+  transition:background .2s,transform .2s;
+}
+.btn-white:hover { background:var(--cream);transform:translateY(-2px) }
+
+.btn-ghost-white {
+  display:inline-block;
+  color:#fff;
+  padding:13px 22px;border-radius:100px;
+  font-size:14px;font-weight:500;
+  text-decoration:none;white-space:nowrap;
+  border:2px solid rgba(255,255,255,.3);
+  transition:border-color .2s;
+}
+.btn-ghost-white:hover { border-color:rgba(255,255,255,.7) }
+
+/* ── FOOTER ── */
+footer {
+  padding:2.5rem clamp(1.5rem,5vw,3.5rem);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1.25rem;
+  border-top:1px solid rgba(74,40,16,.1);
+}
+
+.footer-wm {
+  /* Replace with your wordmark img — same slot as nav */
+  border:1.5px dashed var(--ochre);
+  border-radius:4px;padding:5px 14px;
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ochre);opacity:.6;
+}
+
+.footer-links {
+  display:flex;gap:2rem;list-style:none;
+}
+.footer-links a {
+  font-size:14px;color:var(--warm-mid);
+  text-decoration:none;transition:color .2s;
+}
+.footer-links a:hover { color:var(--rust) }
+
+.footer-copy { font-size:13px;color:rgba(138,96,64,.45) }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1000px){
+  .hero { grid-template-columns:1fr;min-height:auto;gap:2.5rem }
+  .hero-right { order:-1 }
+  .video-frame { aspect-ratio:16/9;transform:rotate(0.5deg) }
+  .about { grid-template-columns:1fr;gap:2rem }
+  .rotated-label { display:none }
+  .how-header { grid-template-columns:1fr }
+  .steps { grid-template-columns:1fr 1fr }
+  .values-top { grid-template-columns:1fr }
+  .values-grid { grid-template-columns:1fr 1fr;gap:1rem }
+  .mem-grid { grid-template-columns:1fr }
+  .cta { grid-template-columns:1fr }
+  .cta-right { align-items:flex-start }
+  .word-field { height:auto;position:static;display:flex;flex-wrap:wrap;gap:10px }
+  .word { position:static !important;transform:none !important }
+  .word:hover { transform:scale(1.05) !important }
+}
+@media(max-width:640px){
+  nav .nav-right a:not(.nav-join) { display:none }
+  .steps { grid-template-columns:1fr }
+  .values-grid { grid-template-columns:1fr }
+  .hero-bg-num { display:none }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity:0;transform:translateY(20px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity:1;transform:translateY(0) }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav aria-label="Main navigation">
+  <!--
+    WORDMARK: Replace .nav-wordmark with:
+    <a href="/"><img src="wordmark.svg" alt="Starting Point" style="height:30px;display:block"></a>
+  -->
+  <div class="nav-wordmark" aria-label="Starting Point wordmark — replace with your design">Your Wordmark</div>
+  <div class="nav-right">
+    <a href="#about">About</a>
+    <a href="#how">Sessions</a>
+    <a href="#membership">Membership</a>
+    <a href="#join" class="nav-join">First session free →</a>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg-num" aria-hidden="true">S</div>
+
+  <div class="hero-left">
+    <div class="eyebrow">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      Seattle, Washington
+    </div>
+
+    <h1>
+      Cook together.
+      <span class="script">Belong<br>somewhere.</span>
+    </h1>
+
+    <p class="hero-desc">
+      Starting Point is a shared kitchen and community gathering space for people facing food insecurity. We cook. We eat. We make things together. That's it — and somehow, it changes everything.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#join" class="btn-fill">Claim your free session</a>
+      <a href="#how" class="btn-line">See how it works →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <!--
+    ═══════════════════════════════════════════════════════════
+    VIDEO — replace .video-inner entirely with your video tag.
+
+    YouTube:
+      <iframe src="https://www.youtube.com/embed/YOUR_ID?rel=0"
+              title="Starting Point story" frameborder="0" allowfullscreen
+              style="width:100%;height:100%;display:block;border:none"></iframe>
+
+    Vimeo:
+      <iframe src="https://player.vimeo.com/video/YOUR_ID"
+              title="Starting Point story" frameborder="0" allowfullscreen
+              style="width:100%;height:100%;display:block;border:none"></iframe>
+
+    Self-hosted:
+      <video src="video.mp4" poster="thumb.jpg" controls
+             style="width:100%;height:100%;object-fit:cover;display:block"></video>
+    ═══════════════════════════════════════════════════════════
+    -->
+    <div class="video-frame">
+      <div class="video-inner" role="img" aria-label="Video placeholder — insert your video here">
+        <div class="play-ring" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+        <p class="video-label">Your story goes here</p>
+        <p class="video-sub">Replace with your video</p>
+      </div>
+    </div>
+    <em class="video-caption">a community that cooks together, stays together</em>
+
+    <!-- rotating sticker -->
+    <div class="sticker" aria-hidden="true" style="bottom:-1rem;right:2rem;">
+      <svg viewBox="0 0 100 100" width="100" height="100">
+        <defs>
+          <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
+        </defs>
+        <text font-size="11" fill="#b84a1a" font-family="'Lora',serif" font-style="italic">
+          <textPath href="#circle">free to join · free to start · Seattle ·&nbsp;</textPath>
+        </text>
+      </svg>
+      <span class="sticker-inner">no cost<br>ever</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Cook</span><span class="dot">·</span>
+    <span>Eat</span><span class="dot">·</span>
+    <span>Make things</span><span class="dot">·</span>
+    <span>Grow</span><span class="dot">·</span>
+    <span>Connect</span><span class="dot">·</span>
+    <span>Belong</span><span class="dot">·</span>
+    <span>Share culture</span><span class="dot">·</span>
+    <span>Be surprised</span><span class="dot">·</span>
+    <span>Cook</span><span class="dot">·</span>
+    <span>Eat</span><span class="dot">·</span>
+    <span>Make things</span><span class="dot">·</span>
+    <span>Grow</span><span class="dot">·</span>
+    <span>Connect</span><span class="dot">·</span>
+    <span>Belong</span><span class="dot">·</span>
+    <span>Share culture</span><span class="dot">·</span>
+    <span>Be surprised</span><span class="dot">·</span>
+  </div>
+</div>
+
+
+<!-- ABOUT -->
+<section class="about reveal" id="about" aria-labelledby="about-heading">
+  <div class="about-left">
+    <div class="rotated-label" aria-hidden="true">Our mission</div>
+    <div class="about-num" aria-hidden="true">01</div>
+    <p class="about-pull">
+      Food insecurity doesn't mean people need<br/>
+      <strong>less</strong> — it means they've been given less.
+    </p>
+    <p class="about-body">
+      Starting Point starts in the kitchen — but that's never really where it ends. When you cook alongside someone, you share recipes, techniques, stories, and a little bit of yourself. By the time you sit down to eat, something has already shifted.
+    </p>
+    <p class="about-body">
+      After dinner, the space transforms. Instruments come out. Crafts appear. Someone starts a song. Someone else finishes it. <span class="hand-underline">This is what community actually feels like.</span>
+    </p>
+    <div class="tag-cluster" style="margin-top:2rem">
+      <span class="tc tc-r">Cooking sessions</span>
+      <span class="tc tc-o">Shared meals</span>
+      <span class="tc tc-g">Jam sessions</span>
+      <span class="tc tc-r">Craft exchanges</span>
+      <span class="tc tc-o">Art gatherings</span>
+    </div>
+  </div>
+
+  <div class="about-right">
+    <div class="statement-block">
+      <p>"The food is the grounding. What grows from it — the friendships, the skills, the sense that you belong somewhere — that's the whole point."</p>
+      <cite>— Starting Point, Seattle WA</cite>
+    </div>
+
+    <div class="statement-block" style="background:var(--sage-light);margin-top:1.25rem">
+      <p style="color:var(--sage);font-size:1rem">"I walked in not knowing anyone. I left knowing how to make injera from scratch — and with three new friends who actually texted me back."</p>
+      <cite style="color:rgba(90,110,72,.5)">— Community member, Seattle</cite>
+    </div>
+  </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="how reveal" id="how" aria-labelledby="how-heading">
+  <div class="how-header">
+    <div>
+      <p class="how-label">The experience</p>
+      <h2 id="how-heading">What actually <em>happens</em></h2>
+    </div>
+    <p class="how-intro">
+      Every session follows a simple arc — but what unfolds inside that arc is different every time, because the people are.
+    </p>
+  </div>
+
+  <div class="steps" role="list">
+    <div class="step" role="listitem">
+      <div class="step-divider" aria-hidden="true"></div>
+      <div class="step-seq" aria-hidden="true">01</div>
+      <span class="step-glyph" aria-hidden="true">🥄</span>
+      <h3>Sleeves up, hands in</h3>
+      <p>You walk into a kitchen, not a waiting room. We cook together — a recipe rooted in someone's culture, shared openly, made by everyone.</p>
+    </div>
+    <div class="step" role="listitem">
+      <div class="step-divider" aria-hidden="true"></div>
+      <div class="step-seq" aria-hidden="true">02</div>
+      <span class="step-glyph" aria-hidden="true">🍽️</span>
+      <h3>Eat what you made</h3>
+      <p>Sit down at the table. The conversation that happens when you've built something together with your own hands — it's different. Easier. More real.</p>
+    </div>
+    <div class="step" role="listitem">
+      <div class="step-divider" aria-hidden="true"></div>
+      <div class="step-seq" aria-hidden="true">03</div>
+      <span class="step-glyph" aria-hidden="true">🎶</span>
+      <h3>The space transforms</h3>
+      <p>After dinner, something shifts. Instruments appear. Crafts come out. Art happens. Whatever the evening calls for — music, making, moving — you belong here.</p>
+    </div>
+    <div class="step" role="listitem">
+      <div class="step-seq" aria-hidden="true">04</div>
+      <span class="step-glyph" aria-hidden="true">🌱</span>
+      <h3>Come back</h3>
+      <p>Your first session is free. Always. After that, membership costs nothing — just your presence. Stay, grow, bring someone with you next time.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- FEELINGS -->
+<section class="feelings reveal" aria-labelledby="feelings-heading">
+  <div class="feelings-header">
+    <p class="feelings-label">What people tell us</p>
+    <h2 id="feelings-heading">
+      It's a lot of things<br/>
+      <strong>at once.</strong>
+    </h2>
+  </div>
+
+  <div class="word-field" aria-label="Emotions and experiences people describe at Starting Point" role="list">
+    <span class="word w1"  role="listitem">Growth</span>
+    <span class="word w2"  role="listitem">a little nervous</span>
+    <span class="word w3"  role="listitem">Inspired</span>
+    <span class="word w4"  role="listitem">imposter syndrome</span>
+    <span class="word w5"  role="listitem">Connection</span>
+    <span class="word w6"  role="listitem">stressed (then okay)</span>
+    <span class="word w7"  role="listitem">Passion</span>
+    <span class="word w8"  role="listitem">challenged</span>
+    <span class="word w9"  role="listitem">Energized</span>
+    <span class="word w10" role="listitem">FOMO → showing up</span>
+    <span class="word w11" role="listitem">Fulfillment</span>
+    <span class="word w12" role="listitem">discomfort</span>
+    <span class="word w13" role="listitem">Supported</span>
+    <span class="word w14" role="listitem">belonging</span>
+    <span class="word w15" role="listitem">Empowered</span>
+  </div>
+
+  <p class="feelings-note">
+    We make space for all of it. You don't have to arrive ready. The discomfort, the imposter syndrome, the FOMO you pushed past to get here — those are part of the experience, not obstacles to it.
+  </p>
+</section>
+
+
+<!-- VALUES -->
+<section class="values reveal" id="values" aria-labelledby="values-heading">
+  <div class="values-top">
+    <div>
+      <p class="values-label">What we stand for</p>
+      <h2 id="values-heading">Five words<br/>we mean.</h2>
+    </div>
+    <p class="values-intro">
+      These aren't aspirations posted on a wall. They're the reason we design every session the way we do — to stretch people just enough, hold them just enough, and get out of the way.
+    </p>
+  </div>
+
+  <div class="values-grid" role="list">
+    <div class="value-card" role="listitem">
+      <span class="value-glyph" aria-hidden="true">🌱</span>
+      <h3>Growth</h3>
+      <p>Not comfortable growth. Real growth — the kind that requires you to try a recipe you've never made in a kitchen you don't own yet.</p>
+    </div>
+    <div class="value-card" role="listitem">
+      <span class="value-glyph" aria-hidden="true">✦</span>
+      <h3>Fulfillment</h3>
+      <p>The feeling of feeding people something you made with your own hands. That's not small. We want everyone to know it.</p>
+    </div>
+    <div class="value-card" role="listitem">
+      <span class="value-glyph" aria-hidden="true">🌊</span>
+      <h3>Discomfort</h3>
+      <p>We design for stretch. If something feels a little hard, that's not a flaw in the experience — that's the experience.</p>
+    </div>
+    <div class="value-card" role="listitem">
+      <span class="value-glyph" aria-hidden="true">🔥</span>
+      <h3>Passion</h3>
+      <p>For food. For art. For each other. Passion is contagious and we let it spread freely.</p>
+    </div>
+    <div class="value-card" role="listitem">
+      <span class="value-glyph" aria-hidden="true">🤝</span>
+      <h3>Connection</h3>
+      <p>You cannot cook with someone and stay a stranger. It's almost impossible. We count on that.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- MEMBERSHIP -->
+<section class="membership reveal" id="membership" aria-labelledby="mem-heading">
+  <p class="membership-label">Access &amp; Membership</p>
+  <h2 id="mem-heading">
+    Open doors.<br/><strong>Free to all.</strong>
+  </h2>
+  <p class="membership-sub">
+    We will never charge anyone to belong here. Your first session is on us — walk in, cook, eat, make art. No card. No catch. After that, membership is required (it keeps our community intentional) but it's always free.
+  </p>
+
+  <div class="mem-grid">
+    <div class="mem-card mc-free">
+      <span class="mc-tag">First visit</span>
+      <div class="mc-price">Free.</div>
+      <p class="mc-qualifier">No card. No obligation. Just show up.</p>
+      <p class="mc-body">Your very first session is completely on the house. Cook, eat, stay for the creative gathering — all of it, no cost, no strings.</p>
+      <ul class="mc-list">
+        <li><span class="mc-bullet">✦</span> Full cooking session</li>
+        <li><span class="mc-bullet">✦</span> Shared meal with the community</li>
+        <li><span class="mc-bullet">✦</span> Evening creative gathering</li>
+        <li><span class="mc-bullet">✦</span> Decide from there</li>
+      </ul>
+    </div>
+
+    <div class="mem-card mc-member">
+      <span class="mc-tag">Membership</span>
+      <div class="mc-price">Free.</div>
+      <p class="mc-qualifier">Always. Not a trial, not a tier.</p>
+      <p class="mc-body">After your first visit, membership keeps things intentional. It's always free — it just means you're part of this, and this is part of you.</p>
+      <ul class="mc-list">
+        <li><span class="mc-bullet">✦</span> Unlimited sessions</li>
+        <li><span class="mc-bullet">✦</span> Early access to new events</li>
+        <li><span class="mc-bullet">✦</span> Contribute recipes &amp; skills</li>
+        <li><span class="mc-bullet">✦</span> Help shape what we become</li>
+      </ul>
+    </div>
+
+    <div class="mem-card mc-donate">
+      <span class="mc-tag">Support the space</span>
+      <div class="mc-price">Donate if you can.</div>
+      <p class="mc-qualifier">Grants + community generosity keep us going.</p>
+      <p class="mc-body">Starting Point runs on grant funding and donations from people who believe in this. If you're in a position to give, it directly keeps these doors open for people who need them.</p>
+      <ul class="mc-list">
+        <li><span class="mc-bullet">✦</span> Funds ingredients &amp; materials</li>
+        <li><span class="mc-bullet">✦</span> Supports free membership for all</li>
+        <li><span class="mc-bullet">✦</span> Helps us reach more of Seattle</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="mem-footer">
+    Funded by grants and community donations. Questions? <a href="mailto:hello@startingpointseattle.org">Get in touch</a>.
+  </p>
+</section>
+
+
+<!-- BIG CTA -->
+<div class="cta reveal" id="join" role="region" aria-labelledby="cta-heading">
+  <div>
+    <h2 id="cta-heading">
+      Your first session<br/>is <strong>waiting for you.</strong>
+    </h2>
+    <p class="cta-sub">Show up. Cook something. Eat together. See what happens. There's no wrong way to start — that's the whole point.</p>
+  </div>
+  <div class="cta-right">
+    <a href="#" class="btn-white">Reserve my free session →</a>
+    <a href="mailto:hello@startingpointseattle.org" class="btn-ghost-white">Or just say hello</a>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <!--
+    WORDMARK: Replace .footer-wm with your wordmark image:
+    <img src="wordmark.svg" alt="Starting Point" style="height:26px;opacity:.7">
+  -->
+  <div class="footer-wm" aria-label="Starting Point wordmark placeholder">Your Wordmark</div>
+  <ul class="footer-links" aria-label="Footer links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#how">Sessions</a></li>
+    <li><a href="#membership">Membership</a></li>
+    <li><a href="mailto:hello@startingpointseattle.org">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Starting Point · Seattle, WA</p>
+</footer>
+
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Stagger feeling words on viewport entry
+const wordField = document.querySelector('.word-field');
+if(wordField){
+  const wordObs = new IntersectionObserver(entries => {
+    if(entries[0].isIntersecting){
+      document.querySelectorAll('.word').forEach((w,i) => {
+        w.style.transitionDelay = (i*45)+'ms';
+        w.style.opacity = '0.85';
+        w.style.transform = w.style.transform || '';
+      });
+      wordObs.disconnect();
+    }
+  },{ threshold:0.1 });
+  // set initial state
+  document.querySelectorAll('.word').forEach(w => {
+    w.style.opacity='0';
+    w.style.transition='opacity .5s ease, transform .2s ease';
+  });
+  wordObs.observe(wordField);
+}
+</script>
+</body>
+</html>
