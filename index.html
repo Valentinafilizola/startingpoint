@@ -1,1304 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Starting Point — Seattle</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&family=Epilogue:wght@400&display=swap" rel="stylesheet"/>
-
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
-:root {
-  --font-main: 'Plus Jakarta Sans', sans-serif;
-  --font-secondary: 'Plus Jakarta Sans', sans-serif;
-  --font-body: 'Epilogue', sans-serif;
-  --ink:       #1e1208;
-  --bark:      #4a2810;
-  --rust:      #b84a1a;
-  --ember:     #d4622a;
-  --ochre:     #c8882a;
-  --straw:     #e8c87a;
-  --cream:     #f7f0e4;
-  --paper:     #faf6ee;
-  --warm-mid:  #8a6040;
-  --sage:      #5a6e48;
-  --sage-light:#e8edd8;
-}
-
-html { scroll-behavior:smooth }
-
-/* ── TYPE SYSTEM ──
-   Main font: Plus Jakarta Sans Bold
-   Secondary font: Plus Jakarta Sans Regular
-   Body text: Epilogue Regular
-*/
-h1,h2,h3,
-.hero-bg-num,.about-num,.step-seq,.mc-price,.word,.sticker-inner {
-  font-family:var(--font-main);
-  font-weight:700;
-  font-style:normal;
-}
-
-nav,.nav-right a,.nav-join,.eyebrow,.btn-fill,.btn-line,
-.values-label,.membership-label,.how-label,.feelings-label,.mc-tag,
-.footer-links a,.footer-copy,.rotated-label,.nav-wordmark,.footer-wm,
-.video-sub,.tc,.mc-qualifier,.mc-list li {
-  font-family:var(--font-secondary);
-  font-weight:400;
-}
-
-p,.hero-desc,.about-body,.how-intro,.step p,.feelings-note,
-.values-intro,.value-card p,.membership-sub,.mc-body,.mem-footer,
-.cta-sub,.statement-block p,.statement-block cite {
-  font-family:var(--font-body);
-  font-weight:400;
-}
-
-
-body {
-  font-family:var(--font-body);
-  font-weight:400;
-  background: var(--paper);
-  color: var(--ink);
-  overflow-x:hidden;
-  cursor: default;
-}
-
-/* grain texture overlay */
-body::before {
-  content:'';
-  position:fixed;inset:0;z-index:999;
-  pointer-events:none;
-  opacity:0.032;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-}
-
-/* ── NAV ── */
-nav {
-  position:sticky;top:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(1.5rem,5vw,3.5rem);
-  height:64px;
-  background:rgba(250,246,238,0.92);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(74,40,16,0.1);
-}
-
-.nav-wordmark {
-  /* ─── WORDMARK SLOT ───────────────────────────────────────
-     Replace this entire element with:
-     <img src="your-wordmark.svg" alt="Starting Point" style="height:32px;">
-  ─────────────────────────────────────────────────────── */
-  border:1.5px dashed var(--ochre);
-  border-radius:4px;
-  padding:6px 16px;
-  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ochre);opacity:.7;
-  white-space:nowrap;
-}
-
-.nav-right { display:flex;align-items:center;gap:2.5rem }
-.nav-right a {
-  font-size:14px;font-weight:400;letter-spacing:.02em;
-  color:var(--warm-mid);text-decoration:none;
-  transition:color .2s;
-}
-.nav-right a:hover { color:var(--rust) }
-.nav-join {
-  background:var(--rust);color:#fff !important;
-  padding:9px 20px;border-radius:100px;
-  font-size:14px;
-  transition:background .2s,transform .15s !important;
-}
-.nav-join:hover { background:var(--bark) !important;transform:translateY(-1px) }
-
-/* ── HERO ── */
-.hero {
-  min-height:96vh;
-  padding: 6vw clamp(1.5rem,5vw,3.5rem) 4vw;
-  display:grid;
-  grid-template-columns:1.1fr 0.9fr;
-  gap:3rem;
-  align-items:center;
-  position:relative;
-}
-
-/* big decorative number */
-.hero-bg-num {
-  position:absolute;
-  right:-0.05em; top: -0.1em;
-  font-family:var(--font-main);
-  font-size:clamp(18rem,30vw,34rem);
-  font-weight:700;
-  color:rgba(200,136,42,0.055);
-  line-height:1;
-  pointer-events:none;
-  user-select:none;
-  letter-spacing:-0.04em;
-}
-
-.hero-left { position:relative;z-index:1 }
-
-.eyebrow {
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:12px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--rust);margin-bottom:2rem;
-}
-.eyebrow-dot {
-  width:6px;height:6px;border-radius:50%;
-  background:var(--rust);flex-shrink:0;
-}
-
-.hero h1 {
-  font-family:var(--font-main);
-  font-size:clamp(3.6rem,7vw,7.5rem);
-  font-weight:700;
-  line-height:.95;
-  letter-spacing:-.03em;
-  color:var(--ink);
-  margin-bottom:2rem;
-}
-
-.hero h1 .script {
-  font-style:normal;
-  font-weight:400;
-  color:var(--rust);
-  display:block;
-  font-size:1.1em;
-}
-
-.hero-desc {
-  font-size:clamp(1rem,1.4vw,1.15rem);
-  line-height:1.8;
-  color:var(--warm-mid);
-  max-width:46ch;
-  margin-bottom:2.75rem;
-}
-
-.hero-actions { display:flex;gap:1rem;flex-wrap:wrap;align-items:center }
-
-.btn-fill {
-  display:inline-block;
-  background:var(--rust);color:#fff;
-  padding:15px 32px;border-radius:100px;
-  font-size:15px;font-weight:400;letter-spacing:.01em;
-  text-decoration:none;
-  transition:background .2s,transform .2s;
-  border:2px solid transparent;
-}
-.btn-fill:hover { background:var(--bark);transform:translateY(-2px) }
-
-.btn-line {
-  display:inline-flex;align-items:center;gap:6px;
-  color:var(--rust);
-  padding:13px 22px;border-radius:100px;
-  font-size:15px;font-weight:400;
-  text-decoration:none;
-  border:2px solid rgba(184,74,26,.25);
-  transition:border-color .2s,background .2s;
-}
-.btn-line:hover { border-color:var(--rust);background:rgba(184,74,26,.05) }
-
-/* sticker */
-.sticker {
-  position:absolute;
-  bottom:-2rem;right:1rem;
-  width:100px;height:100px;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;
-}
-.sticker svg { position:absolute;inset:0;animation:spin 20s linear infinite }
-@keyframes spin { to{transform:rotate(360deg)} }
-.sticker-inner {
-  font-family:var(--font-main);
-  font-size:10px;font-weight:700;
-  font-style:normal;
-  color:var(--rust);
-  line-height:1.3;
-  z-index:1;
-  max-width:60px;
-}
-
-/* ── HERO RIGHT / VIDEO ── */
-.hero-right { position:relative;z-index:1 }
-
-.video-frame {
-  position:relative;
-  border-radius:4px 40px 4px 40px; /* asymmetric — feels handmade */
-  overflow:hidden;
-  aspect-ratio:4/5;
-  background:var(--cream);
-  box-shadow:
-    8px 8px 0 var(--straw),
-    16px 16px 0 rgba(200,136,42,.15);
-  transform:rotate(1.2deg);
-  transition:transform .4s;
-}
-.video-frame:hover { transform:rotate(0deg) }
-
-/* ── VIDEO PLACEHOLDER ──────────────────────────────────────────────
-   Replace .video-inner contents with:
-
-   Self-hosted:
-     <video src="your-video.mp4" poster="thumb.jpg" controls
-            style="width:100%;height:100%;object-fit:cover;display:block">
-     </video>
-
-   YouTube embed:
-     <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0"
-             title="Starting Point — our story" frameborder="0"
-             allowfullscreen
-             style="width:100%;height:100%;display:block;border:none">
-     </iframe>
-
-   Vimeo embed:
-     <iframe src="https://player.vimeo.com/video/VIDEO_ID"
-             title="Starting Point" frameborder="0"
-             allowfullscreen
-             style="width:100%;height:100%;display:block;border:none">
-     </iframe>
-────────────────────────────────────────────────────────────────── -->
-.video-inner {
-  width:100%;height:100%;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:1.25rem;
-  background:linear-gradient(160deg,#b84a1a 0%,#d4622a 55%,#c8882a 100%);
-  color:#fff;cursor:pointer;
-  transition:opacity .2s;
-}
-.video-inner:hover { opacity:.93 }
-
-.play-ring {
-  width:76px;height:76px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.55);
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,.12);
-  transition:background .2s,transform .2s;
-}
-.video-inner:hover .play-ring { background:rgba(255,255,255,.22);transform:scale(1.06) }
-
-.video-label {
-  font-family:var(--font-main);
-  font-size:1.15rem;font-style:normal;font-weight:400;
-  opacity:.88;text-align:center;padding:0 2rem;
-}
-.video-sub { font-size:12px;opacity:.6;letter-spacing:.08em;text-transform:uppercase }
-
-/* handwritten-feeling caption */
-.video-caption {
-  margin-top:1.5rem;
-  font-family:var(--font-main);
-  font-style:normal;
-  font-size:.95rem;
-  color:var(--warm-mid);
-  transform:rotate(-1.5deg);
-  display:block;
-  text-align:center;
-}
-
-/* ── MARQUEE STRIP ── */
-.marquee-strip {
-  background:var(--rust);
-  color:#fff;
-  overflow:hidden;
-  padding:14px 0;
-  white-space:nowrap;
-  position:relative;
-}
-.marquee-track {
-  display:inline-flex;
-  animation:marquee 28s linear infinite;
-}
-.marquee-track span {
-  font-family:var(--font-main);
-  font-size:1.1rem;font-style:normal;font-weight:400;
-  padding:0 2.5rem;
-  opacity:.92;
-}
-.marquee-track .dot { font-style:normal;opacity:.5 }
-@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-/* ── ABOUT ── */
-.about {
-  padding: clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,3.5rem);
-  display:grid;
-  grid-template-columns:0.45fr 0.55fr;
-  gap:5rem;
-  align-items:start;
-}
-
-.about-left { position:relative }
-
-/* rotated label */
-.rotated-label {
-  writing-mode:vertical-rl;
-  text-orientation:mixed;
-  transform:rotate(180deg);
-  font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
-  color:var(--ochre);
-  position:absolute;left:-2.5rem;top:0;
-  height:100%;
-  display:flex;align-items:center;
-  user-select:none;
-}
-
-.about-num {
-  font-family:var(--font-main);
-  font-size:clamp(6rem,12vw,12rem);
-  font-weight:700;
-  color:rgba(200,136,42,.12);
-  line-height:1;
-  margin-bottom:-1.5rem;
-  letter-spacing:-.04em;
-}
-
-.about-pull {
-  font-family:var(--font-main);
-  font-size:clamp(1.8rem,3.5vw,3rem);
-  font-weight:400;
-  font-style:normal;
-  line-height:1.25;
-  color:var(--ink);
-  margin-bottom:2rem;
-}
-.about-pull strong { font-weight:700;font-style:normal;color:var(--rust) }
-
-.about-body {
-  font-size:1.05rem;line-height:1.9;
-  color:var(--warm-mid);
-  margin-bottom:1.75rem;
-}
-
-.hand-underline {
-  display:inline;
-  background:linear-gradient(to right,var(--straw),var(--straw));
-  background-size:100% 35%;
-  background-position:0 85%;
-  background-repeat:no-repeat;
-}
-
-.about-right { padding-top:3rem }
-
-/* the big statement block */
-.statement-block {
-  background:var(--ink);
-  border-radius:2px 32px 2px 32px;
-  padding:2.5rem 2.25rem;
-  margin-bottom:2rem;
-  position:relative;
-  overflow:hidden;
-}
-.statement-block::before {
-  content:'';
-  position:absolute;top:-40%;right:-20%;
-  width:280px;height:280px;border-radius:50%;
-  background:rgba(200,136,42,.08);
-  pointer-events:none;
-}
-.statement-block p {
-  font-family:var(--font-main);
-  font-size:clamp(1.2rem,2vw,1.6rem);
-  font-style:normal;font-weight:400;
-  line-height:1.55;
-  color:var(--straw);
-  position:relative;z-index:1;
-}
-.statement-block cite {
-  display:block;margin-top:1.25rem;
-  font-family:var(--font-body);
-  font-style:normal;font-size:.85rem;
-  color:rgba(232,200,122,.45);
-  letter-spacing:.06em;text-transform:uppercase;
-}
-
-/* tag cluster */
-.tag-cluster { display:flex;flex-wrap:wrap;gap:8px }
-.tc {
-  font-size:13px;font-weight:400;
-  padding:7px 16px;border-radius:100px;
-  letter-spacing:.01em;
-  transition:transform .2s;cursor:default;
-}
-.tc:hover { transform:scale(1.05) }
-.tc-r { background:rgba(184,74,26,.1);color:var(--rust) }
-.tc-o { background:rgba(200,136,42,.14);color:#7a5010 }
-.tc-g { background:rgba(90,110,72,.12);color:var(--sage) }
-
-/* ── HOW ── */
-.how {
-  background:var(--ink);
-  padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,3.5rem);
-  position:relative;
-  overflow:hidden;
-}
-
-.how::before {
-  content:'';
-  position:absolute;bottom:-10%;left:-10%;
-  width:500px;height:500px;border-radius:50%;
-  background:rgba(184,74,26,.07);pointer-events:none;
-}
-
-.how-header {
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:3rem;align-items:end;
-  margin-bottom:clamp(3rem,6vw,5rem);
-}
-
-.how-label {
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  font-weight:400;color:var(--ochre);margin-bottom:1rem;
-}
-
-.how h2 {
-  font-family:var(--font-main);
-  font-size:clamp(2.2rem,4vw,4rem);
-  font-weight:700;font-style:normal;
-  line-height:1.05;letter-spacing:-.02em;
-  color:var(--cream);
-}
-.how h2 em { font-style:normal;color:var(--straw) }
-
-.how-intro {
-  font-size:1rem;line-height:1.8;
-  color:rgba(247,240,228,.55);
-  align-self:end;padding-bottom:.25rem;
-}
-
-/* steps as a horizontal timeline-ish row */
-.steps {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.step {
-  background:var(--ink);
-  padding:2.25rem 1.75rem 2.5rem;
-  position:relative;
-  transition:background .3s;
-}
-.step:hover { background:#2a180a }
-
-.step-seq {
-  font-family:var(--font-main);
-  font-size:3.5rem;font-weight:700;
-  color:rgba(200,136,42,.18);
-  line-height:1;margin-bottom:.75rem;
-  letter-spacing:-.03em;
-}
-
-.step-glyph {
-  font-size:1.6rem;margin-bottom:1rem;
-  display:block;
-}
-
-.step h3 {
-  font-family:var(--font-main);
-  font-size:1.05rem;font-weight:700;
-  color:var(--straw);margin-bottom:.6rem;
-  line-height:1.3;
-}
-
-.step p {
-  font-size:.9rem;line-height:1.75;
-  color:rgba(247,240,228,.5);
-}
-
-.step-divider {
-  position:absolute;right:0;top:10%;bottom:10%;
-  width:1px;background:rgba(255,255,255,.06);
-}
-
-/* ── FEELINGS ── */
-.feelings {
-  padding:clamp(5rem,9vw,8rem) clamp(1.5rem,5vw,3.5rem);
-  position:relative;
-}
-
-/* organic background blob */
-.feelings::before {
-  content:'';
-  position:absolute;
-  top:10%;right:-5%;
-  width:clamp(300px,45vw,600px);
-  height:clamp(300px,45vw,600px);
-  border-radius:62% 38% 55% 45% / 40% 60% 40% 60%;
-  background:rgba(232,200,122,.09);
-  pointer-events:none;
-}
-
-.feelings-header {
-  max-width:60ch;margin-bottom:clamp(3rem,6vw,5rem);
-}
-
-.feelings-label {
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  font-weight:400;color:var(--rust);margin-bottom:1rem;
-}
-
-.feelings h2 {
-  font-family:var(--font-main);
-  font-size:clamp(2rem,4vw,3.6rem);
-  font-weight:400;font-style:normal;
-  line-height:1.1;letter-spacing:-.02em;
-  color:var(--ink);
-}
-.feelings h2 strong {
-  font-weight:700;font-style:normal;
-  display:block;color:var(--rust);
-}
-
-/* scattered word cloud — each word is absolutely positioned for scatter look, 
-   but fallback to flex wrap for accessibility / narrow screens */
-.word-field {
-  position:relative;
-  height:380px;
-  margin:0 auto;
-}
-
-.word {
-  position:absolute;
-  font-family:var(--font-main);
-  font-style:normal;
-  font-weight:400;
-  color:var(--ink);
-  opacity:.85;
-  transition:opacity .2s,transform .2s;
-  cursor:default;
-  line-height:1;
-  white-space:nowrap;
-}
-.word:hover { opacity:1;transform:scale(1.07) !important }
-
-/* individual word placements — varied size, rotation, position */
-.w1  { font-size:clamp(2rem,4vw,4rem);    top:0%;   left:4%;   transform:rotate(-2deg);   color:var(--rust) }
-.w2  { font-size:clamp(1rem,2vw,1.6rem);  top:5%;   left:42%;  transform:rotate(1.5deg);  color:var(--warm-mid) }
-.w3  { font-size:clamp(1.5rem,3vw,2.8rem);top:2%;   left:65%;  transform:rotate(-1deg);   color:var(--ochre) }
-.w4  { font-size:clamp(1rem,1.8vw,1.5rem);top:22%;  left:2%;   transform:rotate(2deg);    color:var(--sage) }
-.w5  { font-size:clamp(2.2rem,4.5vw,4.5rem);top:18%;left:22%;  transform:rotate(-1.5deg); color:var(--ink);font-weight:700;font-style:normal }
-.w6  { font-size:clamp(.9rem,1.5vw,1.3rem);top:28%; left:72%;  transform:rotate(2.5deg);  color:var(--warm-mid) }
-.w7  { font-size:clamp(1.4rem,2.5vw,2.2rem);top:40%;left:5%;   transform:rotate(-3deg);   color:var(--rust) }
-.w8  { font-size:clamp(.85rem,1.3vw,1.2rem);top:42%;left:35%;  transform:rotate(1deg);    color:var(--sage);opacity:.7 }
-.w9  { font-size:clamp(1.8rem,3.5vw,3.2rem);top:44%;left:55%;  transform:rotate(-2deg);   color:var(--ochre) }
-.w10 { font-size:clamp(.85rem,1.4vw,1.25rem);top:58%;left:2%;  transform:rotate(1.5deg);  color:var(--warm-mid);opacity:.7 }
-.w11 { font-size:clamp(2rem,3.8vw,3.5rem);top:58%;  left:22%;  transform:rotate(-1deg);   color:var(--ink) }
-.w12 { font-size:clamp(.9rem,1.5vw,1.3rem);top:60%;  left:65%;  transform:rotate(3deg);    color:var(--rust);opacity:.8 }
-.w13 { font-size:clamp(1.6rem,3vw,2.6rem);top:74%;  left:8%;   transform:rotate(-2.5deg); color:var(--sage) }
-.w14 { font-size:clamp(.9rem,1.6vw,1.4rem);top:78%;  left:42%;  transform:rotate(1deg);    color:var(--warm-mid);opacity:.75 }
-.w15 { font-size:clamp(1.2rem,2.2vw,2rem);top:80%;  left:65%;  transform:rotate(-1.5deg); color:var(--ochre) }
-
-.feelings-note {
-  margin-top:3rem;
-  font-family:var(--font-main);
-  font-style:normal;
-  font-size:1rem;
-  color:var(--warm-mid);
-  max-width:52ch;
-  line-height:1.75;
-  padding-left:1.5rem;
-  border-left:2px solid var(--straw);
-}
-
-/* ── VALUES ── */
-.values {
-  background:var(--cream);
-  padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,3.5rem);
-}
-
-.values-top {
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:4rem;align-items:end;
-  margin-bottom:clamp(3rem,6vw,5rem);
-  padding-bottom:clamp(3rem,6vw,5rem);
-  border-bottom:1px solid rgba(74,40,16,.1);
-}
-
-.values-label {
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  font-weight:400;color:var(--rust);margin-bottom:1rem;
-}
-
-.values h2 {
-  font-family:var(--font-main);
-  font-size:clamp(2.2rem,4vw,3.8rem);
-  font-weight:700;letter-spacing:-.03em;
-  line-height:1;
-  color:var(--ink);
-}
-
-.values-intro {
-  font-size:1rem;line-height:1.85;
-  color:var(--warm-mid);
-  align-self:end;
-}
-
-/* value cards — horizontal scrolling on mobile, grid on desktop */
-.values-grid {
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:1.5rem;
-}
-
-.value-card {
-  padding:2rem 1.5rem;
-  border:1px solid rgba(74,40,16,.1);
-  border-radius:16px;
-  background:#fff;
-  transition:transform .25s,box-shadow .25s,border-color .25s;
-  cursor:default;
-}
-.value-card:hover {
-  transform:translateY(-6px) rotate(-0.5deg);
-  box-shadow:0 16px 40px rgba(74,40,16,.1);
-  border-color:rgba(184,74,26,.2);
-}
-
-.value-glyph { font-size:2rem;display:block;margin-bottom:1.25rem }
-
-.value-card h3 {
-  font-family:var(--font-main);
-  font-size:1.25rem;font-weight:700;font-style:normal;
-  color:var(--rust);
-  margin-bottom:.75rem;line-height:1.1;
-}
-
-.value-card p {
-  font-size:.9rem;line-height:1.75;color:var(--warm-mid);
-}
-
-/* ── MEMBERSHIP ── */
-.membership {
-  padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,3.5rem);
-  position:relative;
-}
-
-.membership-label {
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  font-weight:400;color:var(--rust);margin-bottom:1rem;
-}
-
-.membership h2 {
-  font-family:var(--font-main);
-  font-size:clamp(2.2rem,4vw,3.8rem);
-  font-weight:400;font-style:normal;
-  line-height:1.1;letter-spacing:-.02em;
-  color:var(--ink);
-  margin-bottom:.75rem;
-}
-.membership h2 strong { font-weight:700;color:var(--rust);font-style:normal }
-
-.membership-sub {
-  font-size:1.05rem;line-height:1.8;
-  color:var(--warm-mid);max-width:52ch;
-  margin-bottom:clamp(2.5rem,5vw,4rem);
-}
-
-.mem-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:1.5rem;
-  margin-bottom:2.5rem;
-}
-
-.mem-card {
-  border-radius:20px;
-  padding:2.5rem 2rem;
-  position:relative;overflow:hidden;
-}
-
-.mc-free {
-  background:#fff;
-  border:1px solid rgba(74,40,16,.1);
-}
-.mc-member {
-  background:var(--rust);
-  border:1px solid transparent;
-}
-.mc-donate {
-  background:var(--ink);
-  border:1px solid transparent;
-}
-
-.mc-tag {
-  display:inline-block;
-  font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;
-  padding:4px 12px;border-radius:100px;
-  margin-bottom:1.5rem;
-}
-.mc-free .mc-tag  { background:rgba(184,74,26,.1);color:var(--rust) }
-.mc-member .mc-tag{ background:rgba(255,255,255,.2);color:#fff }
-.mc-donate .mc-tag{ background:rgba(200,136,42,.2);color:var(--straw) }
-
-.mc-price {
-  font-family:var(--font-main);
-  font-size:3rem;font-weight:700;
-  line-height:1;margin-bottom:.35rem;
-}
-.mc-free .mc-price   { color:var(--ink) }
-.mc-member .mc-price { color:#fff }
-.mc-donate .mc-price { color:var(--straw);font-size:2rem;font-weight:400;font-style:italic }
-
-.mc-qualifier {
-  font-size:.85rem;margin-bottom:1.5rem;
-}
-.mc-free .mc-qualifier   { color:var(--warm-mid) }
-.mc-member .mc-qualifier { color:rgba(255,255,255,.6) }
-.mc-donate .mc-qualifier { color:rgba(232,200,122,.5) }
-
-.mc-body {
-  font-size:.92rem;line-height:1.75;margin-bottom:1.5rem;
-}
-.mc-free .mc-body   { color:var(--warm-mid) }
-.mc-member .mc-body { color:rgba(255,255,255,.8) }
-.mc-donate .mc-body { color:rgba(247,240,228,.6) }
-
-.mc-list { list-style:none;display:flex;flex-direction:column;gap:.6rem }
-.mc-list li {
-  font-size:.88rem;display:flex;align-items:flex-start;gap:8px;
-}
-.mc-free .mc-list li   { color:var(--warm-mid) }
-.mc-member .mc-list li { color:rgba(255,255,255,.75) }
-.mc-donate .mc-list li { color:rgba(247,240,228,.55) }
-
-.mc-bullet {
-  font-size:.75rem;margin-top:.3rem;flex-shrink:0;
-}
-.mc-free .mc-bullet   { color:var(--straw) }
-.mc-member .mc-bullet { color:rgba(232,200,122,.7) }
-.mc-donate .mc-bullet { color:rgba(200,136,42,.6) }
-
-.mem-footer {
-  font-family:var(--font-main);
-  font-style:normal;
-  font-size:1rem;
-  color:var(--warm-mid);
-  text-align:center;
-  line-height:1.7;
-}
-.mem-footer a { color:var(--rust);text-underline-offset:3px }
-
-/* ── BIG CTA ── */
-.cta {
-  margin:0 clamp(1rem,3vw,2.5rem) clamp(2rem,4vw,3rem);
-  background:var(--rust);
-  border-radius:4px 36px 4px 36px;
-  padding:clamp(3.5rem,7vw,6rem) clamp(2rem,5vw,4rem);
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:3rem;
-  align-items:center;
-  position:relative;
-  overflow:hidden;
-}
-
-.cta::before {
-  content:'';
-  position:absolute;top:-30%;right:-10%;
-  width:400px;height:400px;border-radius:50%;
-  background:rgba(255,255,255,.06);pointer-events:none;
-}
-
-.cta h2 {
-  font-family:var(--font-main);
-  font-size:clamp(2rem,4vw,3.8rem);
-  font-weight:400;font-style:normal;
-  line-height:1.1;letter-spacing:-.02em;
-  color:#fff;
-}
-.cta h2 strong { font-weight:700;font-style:normal;color:var(--straw) }
-
-.cta-sub {
-  font-size:1rem;line-height:1.75;
-  color:rgba(255,255,255,.65);
-  margin-top:1rem;max-width:44ch;
-}
-
-.cta-right { display:flex;flex-direction:column;gap:1rem;align-items:flex-end;flex-shrink:0 }
-
-.btn-white {
-  display:inline-block;
-  background:#fff;color:var(--rust);
-  padding:15px 28px;border-radius:100px;
-  font-size:15px;font-weight:400;
-  text-decoration:none;white-space:nowrap;
-  transition:background .2s,transform .2s;
-}
-.btn-white:hover { background:var(--cream);transform:translateY(-2px) }
-
-.btn-ghost-white {
-  display:inline-block;
-  color:#fff;
-  padding:13px 22px;border-radius:100px;
-  font-size:14px;font-weight:400;
-  text-decoration:none;white-space:nowrap;
-  border:2px solid rgba(255,255,255,.3);
-  transition:border-color .2s;
-}
-.btn-ghost-white:hover { border-color:rgba(255,255,255,.7) }
-
-/* ── FOOTER ── */
-footer {
-  padding:2.5rem clamp(1.5rem,5vw,3.5rem);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:1.25rem;
-  border-top:1px solid rgba(74,40,16,.1);
-}
-
-.footer-wm {
-  /* Replace with your wordmark img — same slot as nav */
-  border:1.5px dashed var(--ochre);
-  border-radius:4px;padding:5px 14px;
-  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--ochre);opacity:.6;
-}
-
-.footer-links {
-  display:flex;gap:2rem;list-style:none;
-}
-.footer-links a {
-  font-size:14px;color:var(--warm-mid);
-  text-decoration:none;transition:color .2s;
-}
-.footer-links a:hover { color:var(--rust) }
-
-.footer-copy { font-size:13px;color:rgba(138,96,64,.45) }
-
-/* ── RESPONSIVE ── */
-@media(max-width:1000px){
-  .hero { grid-template-columns:1fr;min-height:auto;gap:2.5rem }
-  .hero-right { order:-1 }
-  .video-frame { aspect-ratio:16/9;transform:rotate(0.5deg) }
-  .about { grid-template-columns:1fr;gap:2rem }
-  .rotated-label { display:none }
-  .how-header { grid-template-columns:1fr }
-  .steps { grid-template-columns:1fr 1fr }
-  .values-top { grid-template-columns:1fr }
-  .values-grid { grid-template-columns:1fr 1fr;gap:1rem }
-  .mem-grid { grid-template-columns:1fr }
-  .cta { grid-template-columns:1fr }
-  .cta-right { align-items:flex-start }
-  .word-field { height:auto;position:static;display:flex;flex-wrap:wrap;gap:10px }
-  .word { position:static !important;transform:none !important }
-  .word:hover { transform:scale(1.05) !important }
-}
-@media(max-width:640px){
-  nav .nav-right a:not(.nav-join) { display:none }
-  .steps { grid-template-columns:1fr }
-  .values-grid { grid-template-columns:1fr }
-  .hero-bg-num { display:none }
-}
-
-/* ── SCROLL REVEAL ── */
-.reveal {
-  opacity:0;transform:translateY(20px);
-  transition:opacity .7s ease, transform .7s ease;
-}
-.reveal.visible { opacity:1;transform:translateY(0) }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starting Point — Interactive Community Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&family=Epilogue:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --ink:#1e1208; --bark:#4a2810; --rust:#b84a1a; --ember:#d4622a; --ochre:#c8882a;
+      --straw:#e8c87a; --cream:#f7f0e4; --paper:#faf6ee; --warm:#8a6040; --sage:#5a6e48;
+      --mint:#e8edd8; --white:#fff; --shadow:0 24px 70px rgba(74,40,16,.14);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Epilogue',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;cursor:none}
+    a,button,.card,.drag,.chip,.chef,.magnetic{cursor:none}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:190px}
+    .cursor{position:fixed;width:18px;height:18px;border:1.5px solid var(--rust);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .18s,height .18s,background .18s,border-color .18s;mix-blend-mode:multiply}
+    .cursor.hot{width:58px;height:58px;background:rgba(184,74,26,.1)}
+    .loader{position:fixed;inset:0;background:var(--ink);color:var(--cream);display:grid;place-items:center;z-index:9999;transition:transform .8s cubic-bezier(.76,0,.24,1)}
+    .loader.hide{transform:translateY(-100%)}
+    .load-inner{text-align:center}.load-word{font:700 clamp(2.8rem,9vw,8rem)/.9 'Plus Jakarta Sans';letter-spacing:-.06em}.load-bar{height:6px;width:min(460px,76vw);background:rgba(255,255,255,.12);border-radius:99px;margin:1.25rem auto;overflow:hidden}.load-bar span{display:block;height:100%;width:0;background:var(--straw);animation:load 1.25s forwards}@keyframes load{to{width:100%}}
+    nav{position:fixed;top:0;left:0;right:0;height:72px;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.1rem,4vw,3.5rem);background:rgba(250,246,238,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(74,40,16,.09)}
+    .brand{font:700 1.05rem 'Plus Jakarta Sans';letter-spacing:-.03em;text-decoration:none;color:var(--ink)}
+    .navlinks{display:flex;gap:.5rem;align-items:center}.navlinks a{font:400 .88rem 'Plus Jakarta Sans';color:var(--warm);text-decoration:none;padding:.65rem .95rem;border-radius:99px;transition:.2s}.navlinks a:hover,.navlinks a.active{background:var(--ink);color:var(--cream)}
+    .page{display:none;min-height:100vh;padding-top:72px}.page.active{display:block}.section{padding:clamp(4rem,8vw,7rem) clamp(1.25rem,5vw,4rem)}
+    h1,h2,h3,.display{font-family:'Plus Jakarta Sans';font-weight:700;letter-spacing:-.055em}p{line-height:1.8;color:var(--warm)}
+    .hero{min-height:calc(100vh - 72px);display:grid;grid-template-columns:1fr .9fr;gap:4rem;align-items:center;position:relative;overflow:hidden}.hero-copy{position:relative;z-index:2}.eyebrow{font:400 .78rem 'Plus Jakarta Sans';letter-spacing:.18em;text-transform:uppercase;color:var(--rust);margin-bottom:1.2rem}.hero h1{font-size:clamp(4rem,10vw,10rem);line-height:.86}.hero h1 span{color:var(--rust)}.hero p{font-size:clamp(1rem,1.5vw,1.18rem);max-width:52ch;margin:1.6rem 0 2rem}
+    .btns{display:flex;gap:1rem;flex-wrap:wrap}.btn{border:0;border-radius:99px;padding:1rem 1.4rem;font:400 .95rem 'Plus Jakarta Sans';text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:.22s}.btn.primary{background:var(--rust);color:white}.btn.secondary{background:white;color:var(--rust);border:1px solid rgba(184,74,26,.18)}.btn:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(184,74,26,.18)}
+    .hero-stage{position:relative;height:min(620px,70vh)}.blob{position:absolute;border-radius:36px;box-shadow:var(--shadow);display:grid;place-items:center;text-align:center;user-select:none;touch-action:none}.drag{transition:box-shadow .2s,transform .2s}.drag.dragging{box-shadow:0 28px 80px rgba(74,40,16,.28);z-index:20}.b1{width:260px;height:310px;background:var(--rust);color:white;left:4%;top:15%;transform:rotate(-8deg)}.b2{width:220px;height:220px;background:var(--straw);right:4%;top:8%;transform:rotate(8deg)}.b3{width:260px;height:180px;background:var(--mint);right:10%;bottom:16%;transform:rotate(-4deg)}.b4{width:190px;height:190px;background:white;left:22%;bottom:4%;transform:rotate(7deg)}.blob strong{font:700 2.5rem 'Plus Jakarta Sans';letter-spacing:-.07em}.blob small{font:400 .78rem 'Plus Jakarta Sans';letter-spacing:.12em;text-transform:uppercase;margin-top:.4rem;display:block;opacity:.75}
+    .marquee{background:var(--ink);color:var(--cream);overflow:hidden;white-space:nowrap;padding:1rem 0}.track{display:inline-flex;animation:marquee 24s linear infinite}.track span{font:700 1.15rem 'Plus Jakarta Sans';padding:0 2rem;color:var(--straw)}@keyframes marquee{to{transform:translateX(-50%)}}
+    .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:4rem;align-items:start}.section-title{font-size:clamp(2.4rem,6vw,5.5rem);line-height:.92}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.card{background:white;border:1px solid rgba(74,40,16,.1);border-radius:28px;padding:1.4rem;min-height:240px;transition:transform .22s,box-shadow .22s,border-color .22s;transform-style:preserve-3d}.card:hover{box-shadow:var(--shadow);border-color:rgba(184,74,26,.3)}.card .num{font:700 3rem 'Plus Jakarta Sans';color:rgba(184,74,26,.22);letter-spacing:-.08em}.card h3{font-size:1.35rem;margin:.75rem 0}.card p{font-size:.92rem}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}.reveal.show{opacity:1;transform:none}
+    .recipe-lab{background:var(--cream)}.filters{display:flex;gap:.6rem;flex-wrap:wrap;margin:2rem 0}.chip{border:1px solid rgba(74,40,16,.12);background:white;border-radius:99px;padding:.7rem 1rem;font:400 .85rem 'Plus Jakarta Sans';color:var(--warm)}.chip.active{background:var(--rust);color:white}.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}.project{background:var(--paper);border-radius:26px;overflow:hidden;border:1px solid rgba(74,40,16,.1);transition:.2s}.project:hover{transform:translateY(-8px);box-shadow:var(--shadow)}.project-art{height:170px;background:linear-gradient(135deg,var(--rust),var(--ochre));display:grid;place-items:center;color:white;font:700 4rem 'Plus Jakarta Sans'}.project-body{padding:1.2rem}.tag{display:inline-block;font:400 .72rem 'Plus Jakarta Sans';text-transform:uppercase;letter-spacing:.14em;color:var(--rust);margin-bottom:.6rem}
+    .chefs-hero{background:var(--ink);color:var(--cream)}.chefs-hero p{color:rgba(247,240,228,.68)}.chef-row{display:flex;gap:1rem;overflow:auto;padding:2rem 0;scroll-snap-type:x mandatory}.chef{min-width:300px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.09);border-radius:30px;padding:1.2rem;scroll-snap-align:start;transition:.22s}.chef:hover{background:rgba(255,255,255,.13);transform:translateY(-6px)}.avatar{height:230px;border-radius:22px;background:radial-gradient(circle at 35% 30%,var(--straw),var(--rust) 55%,var(--bark));display:grid;place-items:center;font:700 5rem 'Plus Jakarta Sans';color:white;margin-bottom:1rem}.chef h3{font-size:1.5rem;color:var(--cream)}.chef p{font-size:.92rem;color:rgba(247,240,228,.58)}
+    .volunteer{background:linear-gradient(180deg,var(--paper),var(--cream))}.form-wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;align-items:start}.form{background:white;border-radius:34px;padding:clamp(1.3rem,3vw,2.2rem);box-shadow:var(--shadow);border:1px solid rgba(74,40,16,.08)}.field{margin-bottom:1rem}.field label{display:block;font:400 .78rem 'Plus Jakarta Sans';text-transform:uppercase;letter-spacing:.14em;color:var(--warm);margin-bottom:.45rem}.field input,.field textarea,.field select{width:100%;border:1px solid rgba(74,40,16,.13);background:var(--paper);border-radius:18px;padding:1rem;font:400 1rem 'Epilogue';color:var(--ink);outline:none;transition:.2s}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--rust);box-shadow:0 0 0 4px rgba(184,74,26,.08)}textarea{min-height:130px;resize:vertical}.toast{position:fixed;right:1rem;bottom:1rem;background:var(--ink);color:var(--cream);border-radius:18px;padding:1rem 1.2rem;z-index:999;transform:translateY(140%);transition:.35s}.toast.show{transform:none}
+
+    .experience-flow{background:var(--ink);color:var(--cream);position:relative;overflow:hidden}.experience-flow p{color:rgba(247,240,228,.65)}.flow-wrap{display:grid;grid-template-columns:.82fr 1.18fr;gap:3rem;align-items:start}.phase-rail{position:sticky;top:110px;display:grid;gap:.8rem}.phase-tab{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--cream);border-radius:20px;padding:1rem;text-align:left;font:400 .95rem 'Plus Jakarta Sans';transition:.25s}.phase-tab.active{background:var(--straw);color:var(--ink);transform:translateX(8px)}.phase-cards{display:grid;gap:1rem}.phase-card{min-height:310px;border-radius:34px;padding:2rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:grid;align-content:end;position:relative;overflow:hidden}.phase-card:before{content:attr(data-step);position:absolute;top:-.25em;right:-.05em;font:700 12rem 'Plus Jakarta Sans';letter-spacing:-.1em;color:rgba(232,200,122,.09)}.phase-card h3{color:var(--straw);font-size:2rem;margin-bottom:.7rem}.phase-glyph{font-size:2.6rem;margin-bottom:1.2rem;display:block}.values-showcase{background:var(--cream);overflow:hidden}.value-orbit{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:1rem;margin-top:2rem}.value-token{border:1px solid rgba(74,40,16,.1);background:var(--paper);border-radius:999px;padding:1.2rem;min-height:190px;display:grid;align-content:center;text-align:center;transition:.25s;position:relative;overflow:hidden}.value-token:after{content:'';position:absolute;inset:auto 20% -40% 20%;height:80%;border-radius:50%;background:rgba(184,74,26,.08);transition:.25s}.value-token:hover{border-radius:34px;transform:translateY(-10px) rotate(var(--r));box-shadow:var(--shadow)}.value-token h3{font-size:1.35rem;margin-bottom:.5rem;position:relative;z-index:1}.value-token p{font-size:.85rem;position:relative;z-index:1}.voices{background:var(--paper);position:relative;overflow:hidden}.voice-stage{min-height:470px;position:relative;margin-top:2rem}.quote-card{position:absolute;width:min(420px,82vw);background:white;border:1px solid rgba(74,40,16,.1);border-radius:32px;padding:1.4rem;box-shadow:0 20px 60px rgba(74,40,16,.1);transition:.25s}.quote-card:hover{transform:translateY(-12px) rotate(0deg)!important;z-index:5}.quote-card p{font-size:1.05rem;color:var(--ink)}.quote-card cite{display:block;margin-top:1rem;color:var(--rust);font:400 .78rem 'Plus Jakarta Sans';text-transform:uppercase;letter-spacing:.12em}.q1{left:3%;top:0;transform:rotate(-3deg)}.q2{right:7%;top:45px;transform:rotate(4deg);background:var(--mint)}.q3{left:25%;bottom:20px;transform:rotate(2deg);background:var(--ink)}.q3 p{color:var(--cream)}.q3 cite{color:var(--straw)}.feeling-cloud{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem}.feeling{font:700 clamp(1.1rem,2.6vw,2.8rem) 'Plus Jakarta Sans';letter-spacing:-.06em;color:rgba(30,18,8,.28);transition:.2s}.feeling:hover{color:var(--rust);transform:translateY(-5px) scale(1.05)}.fundraising{background:var(--ink);color:var(--cream)}.fundraising p{color:rgba(247,240,228,.66)}.fund-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:2rem}.fund-card{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.07);border-radius:30px;padding:1.4rem;transition:.25s}.fund-card:hover{background:var(--rust);transform:translateY(-7px)}.fund-card h3{font-size:1.5rem;color:var(--straw);margin-bottom:.5rem}.impact-meter{margin-top:2rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:30px;padding:1.5rem}.range-row{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center}.impact-meter input{width:100%;accent-color:var(--straw)}.impact-number{font:700 2rem 'Plus Jakarta Sans';color:var(--straw)}.impact-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}.impact-list div{background:rgba(255,255,255,.06);border-radius:22px;padding:1rem}.progress-ring{position:fixed;right:1rem;top:88px;width:54px;height:54px;border-radius:50%;z-index:901;background:conic-gradient(var(--rust) 0deg,rgba(184,74,26,.16) 0deg);display:grid;place-items:center;box-shadow:0 10px 30px rgba(74,40,16,.12)}.progress-ring:after{content:'scroll';width:40px;height:40px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font:400 .55rem 'Plus Jakarta Sans';letter-spacing:.08em;color:var(--warm);text-transform:uppercase}
+
+    .modal{position:fixed;inset:0;background:rgba(30,18,8,.54);backdrop-filter:blur(8px);display:none;place-items:center;z-index:950;padding:1rem}.modal.show{display:grid}.modal-card{background:var(--paper);border-radius:32px;padding:2rem;max-width:620px;box-shadow:0 40px 100px rgba(0,0,0,.25);position:relative}.close{position:absolute;right:1rem;top:1rem;border:0;background:var(--ink);color:white;border-radius:50%;width:42px;height:42px;font-size:1.2rem}.modal-card h3{font-size:2.2rem;margin-bottom:.75rem}
+    footer{padding:2rem clamp(1.25rem,5vw,4rem);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px solid rgba(74,40,16,.1);color:var(--warm);font-size:.9rem}
+
+
+    /* Moving photo carousel + story popup */
+    .photo-memory{background:var(--paper);overflow:hidden;position:relative}.photo-memory:before{content:'';position:absolute;inset:8% -18% auto auto;width:520px;height:520px;border-radius:44% 56% 61% 39%;background:rgba(232,200,122,.16);pointer-events:none}.memory-head{display:grid;grid-template-columns:1fr minmax(260px,520px);gap:2rem;align-items:end;margin-bottom:2.5rem;position:relative;z-index:1}.memory-head p:last-child{font-size:1rem}.carousel-shell{width:calc(100% + 8rem);margin-left:-4rem;overflow:hidden;padding:2rem 0 3rem;mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}.photo-track{display:flex;gap:1.15rem;width:max-content;animation:photoMarquee 42s linear infinite}.carousel-shell:hover .photo-track{animation-play-state:running}.photo-card{width:265px;height:340px;flex:0 0 auto;border-radius:34px;position:relative;overflow:hidden;background-image:linear-gradient(180deg,rgba(30,18,8,.05),rgba(30,18,8,.6)),var(--img);background-size:cover;background-position:center;box-shadow:0 22px 60px rgba(74,40,16,.16);border:1px solid rgba(255,255,255,.35);transform:rotate(var(--tilt));transition:transform .32s cubic-bezier(.2,.8,.2,1),filter .32s,box-shadow .32s;isolation:isolate}.photo-card.tall{height:390px;margin-top:-1.4rem}.photo-card.wide{width:345px}.photo-card:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.38),transparent 28%);opacity:0;transition:.25s;mix-blend-mode:soft-light}.photo-card:after{content:attr(data-tag);position:absolute;top:1rem;left:1rem;background:rgba(250,246,238,.86);backdrop-filter:blur(10px);color:var(--rust);border-radius:99px;padding:.55rem .78rem;font:400 .68rem 'Plus Jakarta Sans';text-transform:uppercase;letter-spacing:.12em}.photo-card span{position:absolute;left:1.1rem;right:1.1rem;bottom:1rem;color:white;font:700 2rem/.92 'Plus Jakarta Sans';letter-spacing:-.06em;text-shadow:0 4px 18px rgba(30,18,8,.4)}.photo-card:hover{transform:rotate(0deg) translateY(-18px) scale(1.035);filter:saturate(1.08) contrast(1.04);box-shadow:0 34px 90px rgba(74,40,16,.26);z-index:4}.photo-card:hover:before{opacity:1}@keyframes photoMarquee{to{transform:translateX(-50%)}}
+
+    .event-pop{position:fixed;inset:0;background:rgba(30,18,8,.35);backdrop-filter:blur(10px);display:none;place-items:center;z-index:2000;padding:1rem}.event-pop.show{display:grid}.event-card{width:min(460px,92vw);background:var(--paper);border:1px solid rgba(74,40,16,.12);box-shadow:0 30px 100px rgba(30,18,8,.25);border-radius:34px;padding:1.5rem;transform:translateY(20px) scale(.96);animation:popIn .28s forwards}.event-card .tag{margin-bottom:1rem}.event-card h3{font-size:2.2rem;margin-bottom:.7rem}.event-card p{font-size:1rem}.event-close{float:right;border:0;background:var(--ink);color:var(--cream);width:38px;height:38px;border-radius:50%;font-size:1.25rem}@keyframes popIn{to{transform:none}}
+
+    /* Redesigned parallax phases */
+    .phase-parallax{background:var(--ink);color:var(--cream);position:relative;overflow:hidden}.phase-parallax p{color:rgba(247,240,228,.66)}.phase-parallax:before{content:'';position:absolute;inset:-20% -10% auto auto;width:720px;height:720px;background:radial-gradient(circle,rgba(184,74,26,.22),transparent 62%);pointer-events:none}.phase-intro{max-width:900px;margin-bottom:3rem;position:relative;z-index:1}.phase-intro p:last-child{max-width:68ch;margin-top:1.2rem}.parallax-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(2rem,5vw,5rem);align-items:start;position:relative;z-index:1}.parallax-scene{position:sticky;top:102px;height:calc(100vh - 140px);min-height:560px;border-radius:42px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.1);overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.18)}.plaque{position:absolute;top:1.2rem;left:1.2rem;border:1px solid rgba(232,200,122,.32);color:var(--straw);border-radius:99px;padding:.65rem .9rem;font:400 .72rem 'Plus Jakarta Sans';letter-spacing:.18em}.para-layer{position:absolute;will-change:transform;filter:drop-shadow(0 20px 35px rgba(0,0,0,.18));transition:filter .2s}.plate{font-size:11rem;left:15%;top:18%;opacity:.92}.spoon{font-size:7rem;right:12%;top:10%;transform:rotate(12deg)}.music{font:700 14rem 'Plus Jakarta Sans';color:rgba(232,200,122,.22);left:48%;bottom:18%}.leaf{font-size:7rem;left:12%;bottom:13%}.scene-note{position:absolute;left:1.2rem;right:1.2rem;bottom:1.2rem;background:rgba(30,18,8,.62);border:1px solid rgba(255,255,255,.09);border-radius:26px;padding:1.1rem;color:var(--cream);font:700 clamp(1.4rem,3vw,2.6rem)/.95 'Plus Jakarta Sans';letter-spacing:-.06em}.phase-stack{display:grid;gap:34vh;padding:5vh 0 12vh}.phase-panel{min-height:54vh;display:grid;align-content:center;border-radius:38px;padding:clamp(1.4rem,3vw,2.4rem);background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.11);position:relative;overflow:hidden;transition:transform .35s,background .35s,border-color .35s}.phase-panel:before{content:'';position:absolute;inset:auto -10% -40% 30%;height:70%;border-radius:50%;background:rgba(232,200,122,.08);transition:.35s}.phase-panel.is-active{background:rgba(255,255,255,.13);border-color:rgba(232,200,122,.32);transform:translateX(-12px)}.phase-panel span{font:700 clamp(5rem,12vw,10rem)/.78 'Plus Jakarta Sans';letter-spacing:-.12em;color:rgba(232,200,122,.18);margin-bottom:1rem}.phase-panel h3{font-size:clamp(2rem,4vw,4.2rem);line-height:.9;color:var(--straw);margin-bottom:1rem;max-width:8ch}.phase-panel p{max-width:52ch;font-size:1.02rem}.phase-panel:nth-child(even){transform:translateX(24px)}.phase-panel:nth-child(even).is-active{transform:translateX(8px)}
+
+
+
+    /* Updated horizontal phases + never-stopping carousel */
+    .photo-track{animation:photoMarquee 34s linear infinite!important;will-change:transform}.carousel-shell:hover .photo-track{animation-play-state:running!important}.photo-card:hover{animation:photoBob .7s cubic-bezier(.34,1.56,.64,1)}@keyframes photoBob{0%,100%{translate:0 0}45%{translate:0 -8px}}
+    .phase-parallax{background:var(--ink);color:var(--cream);position:relative;overflow:hidden}.horizontal-phase-intro{display:grid;grid-template-columns:minmax(260px,.8fr) 1fr;gap:clamp(1rem,4vw,3rem);align-items:end;max-width:none;margin-bottom:2.4rem}.horizontal-phase-intro h2{max-width:780px}.horizontal-phase-intro p:last-child{max-width:62ch;margin-top:0}.phase-horizontal-wrap{position:relative;min-height:620px;border-radius:46px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));overflow:hidden;padding:clamp(1.2rem,3vw,2rem);box-shadow:0 34px 100px rgba(0,0,0,.18)}.phase-parallax-backdrop{position:absolute;inset:0;pointer-events:none}.float-mark{position:absolute;display:block;will-change:transform;filter:drop-shadow(0 24px 40px rgba(0,0,0,.16));opacity:.9}.mark-plate{font-size:12rem;left:4%;top:8%}.mark-spoon{font-size:7rem;right:8%;top:8%;transform:rotate(14deg)}.mark-note{font:700 18rem 'Plus Jakarta Sans';right:10%;bottom:0;color:rgba(232,200,122,.16);letter-spacing:-.08em}.mark-leaf{font-size:8rem;left:10%;bottom:6%}.phase-horizontal{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(210px,1fr));gap:1rem;align-items:stretch;min-height:520px}.phase-bounce-card{position:relative;overflow:hidden;align-self:center;min-height:390px;display:flex;flex-direction:column;justify-content:flex-end;border-radius:36px;padding:1.35rem;background:rgba(250,246,238,.92);color:var(--ink);border:1px solid rgba(255,255,255,.45);box-shadow:0 24px 70px rgba(0,0,0,.16);transform:translateY(var(--lift,0)) rotate(var(--tilt));transition:transform .42s cubic-bezier(.34,1.56,.64,1),box-shadow .32s,background .32s;animation:phaseFloat 4.8s ease-in-out infinite;animation-delay:var(--delay)}.phase-bounce-card:nth-child(2),.phase-bounce-card:nth-child(4){--lift:46px}.phase-bounce-card:before{content:'';position:absolute;inset:-25% -30% auto auto;width:260px;height:260px;border-radius:50%;background:rgba(232,200,122,.36);transition:.42s cubic-bezier(.34,1.56,.64,1)}.phase-bounce-card:after{content:'';position:absolute;inset:auto 12% -45% 12%;height:55%;border-radius:50%;background:rgba(184,74,26,.12);transition:.42s}.phase-bounce-card:hover,.phase-bounce-card.is-active{transform:translateY(calc(var(--lift,0) - 22px)) rotate(0deg) scale(1.035);box-shadow:0 36px 100px rgba(0,0,0,.26);background:#fff;z-index:3}.phase-bounce-card:hover:before,.phase-bounce-card.is-active:before{transform:scale(1.25);background:rgba(184,74,26,.18)}.phase-bounce-card:hover:after,.phase-bounce-card.is-active:after{transform:translateY(-18px)}.phase-count{position:absolute;top:.8rem;right:1rem;font:700 clamp(4rem,8vw,7rem)/.8 'Plus Jakarta Sans';letter-spacing:-.12em;color:rgba(184,74,26,.16)}.phase-icon{font-size:2.4rem;margin-bottom:1rem;position:relative;z-index:1;transform-origin:center;transition:transform .42s cubic-bezier(.34,1.56,.64,1)}.phase-bounce-card:hover .phase-icon,.phase-bounce-card.is-active .phase-icon{transform:rotate(-8deg) scale(1.18)}.phase-bounce-card h3{font-size:clamp(1.55rem,2.7vw,2.25rem);line-height:.95;color:var(--rust);margin-bottom:.75rem;position:relative;z-index:1;letter-spacing:-.07em}.phase-bounce-card p{font-size:.92rem;color:var(--warm);position:relative;z-index:1}.phase-nudge{position:relative;z-index:1;align-self:flex-start;margin-top:1rem;border:0;border-radius:99px;background:var(--ink);color:var(--cream);padding:.72rem .95rem;font:400 .72rem 'Plus Jakarta Sans';letter-spacing:.12em;text-transform:uppercase;transition:transform .22s,background .22s}.phase-bounce-card:hover .phase-nudge{transform:translateY(-3px);background:var(--rust)}@keyframes phaseFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}@media(max-width:1000px){.horizontal-phase-intro{grid-template-columns:1fr}.phase-horizontal-wrap{min-height:auto}.phase-horizontal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:.5rem .5rem 2rem;min-height:500px}.phase-bounce-card{min-width:280px;scroll-snap-align:center}.phase-bounce-card:nth-child(2),.phase-bounce-card:nth-child(4){--lift:22px}.mark-note{font-size:12rem}.mark-plate{font-size:8rem}}
+
+    @media(max-width:900px){body{cursor:auto}a,button,.card,.drag,.chip,.chef,.magnetic{cursor:pointer}.cursor{display:none}.hero,.split,.form-wrap{grid-template-columns:1fr}.flow-wrap{grid-template-columns:1fr}.phase-rail{position:static}.value-orbit,.fund-grid,.impact-list{grid-template-columns:1fr}.voice-stage{min-height:auto;display:grid;gap:1rem}.quote-card{position:static;width:auto;transform:none!important}.hero-stage{height:480px}.cards,.project-grid{grid-template-columns:1fr}.navlinks{gap:.1rem}.navlinks a{padding:.55rem .65rem}.brand{font-size:.95rem}}
+    @media(max-width:560px){nav{height:auto;min-height:72px;align-items:flex-start;padding-top:1rem;padding-bottom:1rem}.navlinks{flex-wrap:wrap;justify-content:flex-end}.page{padding-top:96px}.hero-stage{height:420px}.blob{scale:.75}.b1{left:-12%}.b2{right:-12%}.b3{right:-12%}.b4{left:10%}.hero h1{font-size:3.8rem}}
+  
+    @media(max-width:900px){.memory-head,.parallax-layout{grid-template-columns:1fr}.carousel-shell{width:calc(100% + 2rem);margin-left:-1rem}.photo-card{width:230px;height:310px}.photo-card.wide{width:285px}.parallax-scene{position:relative;top:auto;height:420px;min-height:420px}.phase-stack{gap:1rem;padding:0}.phase-panel,.phase-panel:nth-child(even),.phase-panel.is-active,.phase-panel:nth-child(even).is-active{min-height:auto;transform:none}.phase-panel h3{max-width:none}}
+
+
+
+    /* Final refinement: smoother carousel hover, glowing simple phases, draggable quotes */
+    .photo-track{
+      animation:photoMarquee 34s linear infinite!important;
+      will-change:transform;
+    }
+    .carousel-shell:hover .photo-track{animation-play-state:running!important}
+    .photo-card{
+      transition:
+        transform .58s cubic-bezier(.16,1,.3,1),
+        filter .58s cubic-bezier(.16,1,.3,1),
+        box-shadow .58s cubic-bezier(.16,1,.3,1),
+        border-color .58s cubic-bezier(.16,1,.3,1)!important;
+      will-change:transform,filter;
+    }
+    .photo-card:hover{
+      animation:none!important;
+      transform:rotate(calc(var(--tilt) * .18)) translateY(-14px) scale(1.028)!important;
+      filter:saturate(1.08) contrast(1.035) brightness(1.03);
+      box-shadow:0 32px 86px rgba(74,40,16,.24);
+      border-color:rgba(255,255,255,.72);
+    }
+    .photo-card:before{transition:opacity .42s ease!important}
+
+    .phase-horizontal-wrap{
+      box-shadow:0 34px 100px rgba(0,0,0,.16), inset 0 0 70px rgba(232,200,122,.035);
+    }
+    .phase-horizontal{align-items:stretch}
+    .phase-bounce-card,
+    .phase-bounce-card:nth-child(2),
+    .phase-bounce-card:nth-child(4){
+      --lift:0px!important;
+      animation:none!important;
+      align-self:stretch;
+      min-height:430px;
+      transform:rotate(var(--tilt));
+      transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease,
+        background .28s ease,
+        filter .28s ease!important;
+    }
+    .phase-bounce-card:before,
+    .phase-bounce-card:after{
+      transition:opacity .28s ease,transform .28s ease,background .28s ease!important;
+    }
+    .phase-bounce-card:hover,
+    .phase-bounce-card.is-active{
+      transform:translateY(-8px) rotate(0deg)!important;
+      background:#fffdf8;
+      border-color:rgba(232,200,122,.9);
+      box-shadow:
+        0 0 0 1px rgba(232,200,122,.38),
+        0 0 42px rgba(232,200,122,.38),
+        0 28px 88px rgba(0,0,0,.22)!important;
+      filter:saturate(1.02);
+      z-index:3;
+    }
+    .phase-bounce-card:hover:before,
+    .phase-bounce-card.is-active:before{
+      transform:none!important;
+      background:rgba(232,200,122,.3)!important;
+    }
+    .phase-bounce-card:hover:after,
+    .phase-bounce-card.is-active:after{transform:none!important}
+    .phase-icon{transition:opacity .25s ease!important}
+    .phase-bounce-card:hover .phase-icon,
+    .phase-bounce-card.is-active .phase-icon{
+      transform:none!important;
+      opacity:.92;
+    }
+    .phase-nudge{transition:background .2s ease,color .2s ease,box-shadow .2s ease!important}
+    .phase-bounce-card:hover .phase-nudge,
+    .phase-bounce-card.is-active .phase-nudge{
+      transform:none!important;
+      background:var(--rust);
+      box-shadow:0 0 24px rgba(184,74,26,.22);
+    }
+
+    .voice-stage{min-height:500px}
+    .quote-card.drag{
+      touch-action:none;
+      user-select:none;
+      will-change:translate,transform,box-shadow;
+      cursor:none;
+      transition:box-shadow .22s ease,border-color .22s ease,background .22s ease,transform .22s ease;
+    }
+    .quote-card.drag:hover{
+      z-index:8;
+      border-color:rgba(184,74,26,.28);
+      box-shadow:0 28px 80px rgba(74,40,16,.18);
+    }
+    .quote-card.drag.dragging{
+      z-index:20;
+      border-color:rgba(232,200,122,.9);
+      box-shadow:0 34px 100px rgba(74,40,16,.28),0 0 36px rgba(232,200,122,.32);
+    }
+    @media(max-width:1000px){
+      .phase-bounce-card,
+      .phase-bounce-card:nth-child(2),
+      .phase-bounce-card:nth-child(4){min-height:390px;align-self:stretch}
+    }
+
+  </style>
 </head>
 <body>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="loader"><div class="load-inner"><div class="load-word">STARTING<br>POINT</div><div class="load-bar"><span></span></div><p>loading the table</p></div></div>
 
-<!-- NAV -->
-<nav aria-label="Main navigation">
-  <!--
-    WORDMARK: Replace .nav-wordmark with:
-    <a href="/"><img src="wordmark.svg" alt="Starting Point" style="height:30px;display:block"></a>
-  -->
-  <div class="nav-wordmark" aria-label="Starting Point wordmark — replace with your design">Your Wordmark</div>
-  <div class="nav-right">
-    <a href="#about">About</a>
-    <a href="#how">Sessions</a>
-    <a href="#membership">Membership</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfWZhsJJlIuzIL_E0ss68_7qTVdflnSaS1qLmJmpiUKWnIYOg/viewform" class="nav-join">First session free →</a>
-  </div>
-</nav>
-
-
-<!-- HERO -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-bg-num" aria-hidden="true">S</div>
-
-  <div class="hero-left">
-    <div class="eyebrow">
-      <span class="eyebrow-dot" aria-hidden="true"></span>
-      Seattle, Washington
+  <nav>
+    <a class="brand magnetic" href="#home" data-page="home">Starting Point</a>
+    <div class="navlinks">
+      <a class="active magnetic" href="#home" data-page="home">Home</a>
+      <a class="magnetic" href="#chefs" data-page="chefs">Our chefs</a>
+      <a class="magnetic" href="#volunteer" data-page="volunteer">Volunteer</a>
     </div>
+  </nav>
 
-    <h1>
-      Cook together.
-      <span class="script">Belong<br>somewhere.</span>
-    </h1>
-
-    <p class="hero-desc">
-      Starting Point is a shared kitchen and community gathering space for people facing food insecurity. We cook. We eat. We make things together. That's it — and somehow, it changes everything.
-    </p>
-
-    <div class="hero-actions">
-      <a href="#join" class="btn-fill">Claim your free session</a>
-      <a href="#how" class="btn-line">See how it works →</a>
-    </div>
-  </div>
-
-  <div class="hero-right">
-    <!--
-    ═══════════════════════════════════════════════════════════
-    VIDEO — replace .video-inner entirely with your video tag.
-
-    YouTube:
-      <iframe src="https://www.youtube.com/embed/YOUR_ID?rel=0"
-              title="Starting Point story" frameborder="0" allowfullscreen
-              style="width:100%;height:100%;display:block;border:none"></iframe>
-
-    Vimeo:
-      <iframe src="https://player.vimeo.com/video/YOUR_ID"
-              title="Starting Point story" frameborder="0" allowfullscreen
-              style="width:100%;height:100%;display:block;border:none"></iframe>
-
-    Self-hosted:
-      <video src="video.mp4" poster="thumb.jpg" controls
-             style="width:100%;height:100%;object-fit:cover;display:block"></video>
-    ═══════════════════════════════════════════════════════════
-    -->
-    <div class="video-frame">
-      <div class="video-inner" role="img" aria-label="Video placeholder — insert your video here">
-        <div class="play-ring" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
+  <main>
+    <section id="home" class="page active">
+      <div class="section hero">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Seattle community kitchen</p>
+          <h1>Cook.<br><span>Connect.</span><br>Begin.</h1>
+          <p>Starting Point is a shared kitchen and creative gathering space where people facing food insecurity cook together, eat together, and leave with more than a meal.</p>
+          <div class="btns"><a class="btn primary magnetic" href="#volunteer" data-page="volunteer">Become a volunteer →</a><a class="btn secondary magnetic" href="#chefs" data-page="chefs">Meet the chefs</a></div>
         </div>
-        <p class="video-label">Your story goes here</p>
-        <p class="video-sub">Replace with your video</p>
+        <div class="hero-stage" aria-label="Draggable interaction cards">
+          <div class="blob drag b1"><div><strong>drag me</strong><small>interaction card</small></div></div>
+          <div class="blob drag b2"><div><strong>cook</strong><small>hands-on sessions</small></div></div>
+          <div class="blob drag b3"><div><strong>share</strong><small>recipes + stories</small></div></div>
+          <div class="blob drag b4"><div><strong>stay</strong><small>music after dinner</small></div></div>
+        </div>
       </div>
-    </div>
-    <em class="video-caption">a community that cooks together, stays together</em>
+      <div class="marquee"><div class="track"><span>COOK TOGETHER</span><span>·</span><span>FREE TO JOIN</span><span>·</span><span>COMMUNITY CARE</span><span>·</span><span>SHARED MEALS</span><span>·</span><span>COOK TOGETHER</span><span>·</span><span>FREE TO JOIN</span><span>·</span><span>COMMUNITY CARE</span><span>·</span><span>SHARED MEALS</span><span>·</span></div></div>
+      <section class="section photo-memory reveal" id="moments">
+        <div class="memory-head">
+          <div>
+            <p class="eyebrow">Captured at the table</p>
+            <h2 class="section-title">Moments that keep moving.</h2>
+          </div>
+          <p>Hover to slow the room down. Click any photo to open a small story from the night — the kind of tiny, human detail that makes the event feel alive.</p>
+        </div>
+        <div class="carousel-shell" aria-label="Moving event photo carousel">
+          <div class="photo-track">
+            <article class="photo-card" data-title="Recipe Circle" data-tag="before dinner" data-desc="The night starts with everyone gathered around the island: hands washed, sleeves rolled, and one recipe becoming everyone's recipe." style="--tilt:-4deg;--img:url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=900&q=80')"><span>Recipe Circle</span></article>
+            <article class="photo-card tall" data-title="First Taste" data-tag="during the cook" data-desc="Someone always gets to be the first taste-tester. It is low pressure, funny, and usually the moment strangers start acting like teammates." style="--tilt:3deg;--img:url('https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=900&q=80')"><span>First Taste</span></article>
+            <article class="photo-card" data-title="Shared Table" data-tag="dinner" data-desc="After cooking, the room gets quieter for a second. People sit down, pass plates, and realize they made something together." style="--tilt:-1deg;--img:url('https://images.unsplash.com/photo-1514986888952-8cd320577b68?auto=format&fit=crop&w=900&q=80')"><span>Shared Table</span></article>
+            <article class="photo-card wide" data-title="Craft After Dinner" data-tag="creative hour" data-desc="Once the meal ends, the table resets: scraps of paper, markers, mending, collage, instruments, and no pressure to be good at any of it." style="--tilt:4deg;--img:url('https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=900&q=80')"><span>Craft After Dinner</span></article>
+            <article class="photo-card" data-title="Kitchen Jam" data-tag="after hours" data-desc="The best nights end with someone tapping a rhythm on the counter, someone else joining in, and the room deciding to stay a little longer." style="--tilt:-3deg;--img:url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80')"><span>Kitchen Jam</span></article>
+            <article class="photo-card tall" data-title="Come Back Soon" data-tag="goodbye" data-desc="People leave with leftovers, a new recipe, and usually one person they did not know before but now expect to see next week." style="--tilt:2deg;--img:url('https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=80')"><span>Come Back Soon</span></article>
+            <article class="photo-card" data-title="Recipe Circle" data-tag="before dinner" data-desc="The night starts with everyone gathered around the island: hands washed, sleeves rolled, and one recipe becoming everyone's recipe." style="--tilt:-4deg;--img:url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=900&q=80')"><span>Recipe Circle</span></article>
+            <article class="photo-card tall" data-title="First Taste" data-tag="during the cook" data-desc="Someone always gets to be the first taste-tester. It is low pressure, funny, and usually the moment strangers start acting like teammates." style="--tilt:3deg;--img:url('https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=900&q=80')"><span>First Taste</span></article>
+            <article class="photo-card" data-title="Shared Table" data-tag="dinner" data-desc="After cooking, the room gets quieter for a second. People sit down, pass plates, and realize they made something together." style="--tilt:-1deg;--img:url('https://images.unsplash.com/photo-1514986888952-8cd320577b68?auto=format&fit=crop&w=900&q=80')"><span>Shared Table</span></article>
+            <article class="photo-card wide" data-title="Craft After Dinner" data-tag="creative hour" data-desc="Once the meal ends, the table resets: scraps of paper, markers, mending, collage, instruments, and no pressure to be good at any of it." style="--tilt:4deg;--img:url('https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=900&q=80')"><span>Craft After Dinner</span></article>
+            <article class="photo-card" data-title="Kitchen Jam" data-tag="after hours" data-desc="The best nights end with someone tapping a rhythm on the counter, someone else joining in, and the room deciding to stay a little longer." style="--tilt:-3deg;--img:url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80')"><span>Kitchen Jam</span></article>
+            <article class="photo-card tall" data-title="Come Back Soon" data-tag="goodbye" data-desc="People leave with leftovers, a new recipe, and usually one person they did not know before but now expect to see next week." style="--tilt:2deg;--img:url('https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=80')"><span>Come Back Soon</span></article>
+          </div>
+        </div>
+      </section>
+      <section class="section recipe-lab reveal" id="sessions">
+        <p class="eyebrow">Session finder</p><h2 class="section-title">Choose your kind of night.</h2>
+        <div class="filters"><button class="chip active" data-filter="all">All</button><button class="chip" data-filter="food">Food</button><button class="chip" data-filter="art">Art</button><button class="chip" data-filter="music">Music</button></div>
+        <div class="project-grid">
+          <article class="project" data-kind="food" data-title="Family Recipe Night" data-desc="A chef leads the group through a dish from their own family table. Everyone cooks, plates, and eats together."><div class="project-art">FR</div><div class="project-body"><span class="tag">food</span><h3>Family Recipe Night</h3><p>Cook one meaningful dish from start to finish.</p></div></article>
+          <article class="project" data-kind="art" data-title="Craft After Dinner" data-desc="After the shared meal, the room turns into a low-pressure making space with collage, mending, drawing, and small take-home objects."><div class="project-art">CA</div><div class="project-body"><span class="tag">art</span><h3>Craft After Dinner</h3><p>Make something with your hands after the meal.</p></div></article>
+          <article class="project" data-kind="music" data-title="Kitchen Jam" data-desc="Bring an instrument, borrow a shaker, or just listen. The music begins after dinner and belongs to everyone in the room."><div class="project-art">KJ</div><div class="project-body"><span class="tag">music</span><h3>Kitchen Jam</h3><p>A casual jam session for every skill level.</p></div></article>
+        </div>
+      </section>
+      <section class="section phase-parallax reveal" id="phases">
+        <div class="phase-intro horizontal-phase-intro">
+          <p class="eyebrow">Phases of the event</p>
+          <h2 class="section-title">The night unfolds side by side.</h2>
+          <p>Each phase sits in one horizontal sequence, so the whole evening feels like a single shared table. The backdrop moves at a slower speed while the cards bounce, tilt, and respond to your cursor.</p>
+        </div>
 
-    <!-- rotating sticker -->
-    <div class="sticker" aria-hidden="true" style="bottom:-1rem;right:2rem;">
-      <svg viewBox="0 0 100 100" width="100" height="100">
-        <defs>
-          <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
-        </defs>
-        <text font-size="11" fill="#b84a1a" font-family="'Lora',serif" font-style="italic">
-          <textPath href="#circle">free to join · free to start · Seattle ·&nbsp;</textPath>
-        </text>
-      </svg>
-      <span class="sticker-inner">no cost<br>ever</span>
-    </div>
-  </div>
-</section>
+        <div class="phase-horizontal-wrap">
+          <div class="phase-parallax-backdrop" aria-hidden="true">
+            <span class="float-mark mark-plate" data-speed="-.12">🍽️</span>
+            <span class="float-mark mark-spoon" data-speed=".18">🥄</span>
+            <span class="float-mark mark-note" data-speed=".28">♪</span>
+            <span class="float-mark mark-leaf" data-speed="-.22">🌱</span>
+          </div>
 
+          <div class="phase-horizontal" aria-label="Phases of a Starting Point event">
+            <article class="phase-bounce-card" data-phase-card style="--tilt:-2deg;--delay:0ms">
+              <span class="phase-count">01</span>
+              <div class="phase-icon">🥄</div>
+              <h3>Sleeves up, hands in</h3>
+              <p>You walk into a kitchen, not a waiting room. We cook together — a recipe rooted in someone's culture, shared openly, made by everyone.</p>
+              <button class="phase-nudge" type="button">start here</button>
+            </article>
+            <article class="phase-bounce-card" data-phase-card style="--tilt:1.5deg;--delay:70ms">
+              <span class="phase-count">02</span>
+              <div class="phase-icon">🍽️</div>
+              <h3>Eat what you made</h3>
+              <p>Sit down at the table. The conversation that happens when you've built something together with your own hands is different: easier, warmer, more real.</p>
+              <button class="phase-nudge" type="button">gather round</button>
+            </article>
+            <article class="phase-bounce-card" data-phase-card style="--tilt:-1deg;--delay:140ms">
+              <span class="phase-count">03</span>
+              <div class="phase-icon">🎶</div>
+              <h3>The space transforms</h3>
+              <p>After dinner, something shifts. Instruments appear. Crafts come out. Art happens. The room becomes whatever the evening calls for.</p>
+              <button class="phase-nudge" type="button">make magic</button>
+            </article>
+            <article class="phase-bounce-card" data-phase-card style="--tilt:2deg;--delay:210ms">
+              <span class="phase-count">04</span>
+              <div class="phase-icon">🌱</div>
+              <h3>Come back</h3>
+              <p>Your first session is free. Always. After that, membership costs nothing — just your presence. Stay, grow, and bring someone with you next time.</p>
+              <button class="phase-nudge" type="button">return soon</button>
+            </article>
+          </div>
+        </div>
+      </section>
 
-<!-- MARQUEE -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Cook</span><span class="dot">·</span>
-    <span>Eat</span><span class="dot">·</span>
-    <span>Make things</span><span class="dot">·</span>
-    <span>Grow</span><span class="dot">·</span>
-    <span>Connect</span><span class="dot">·</span>
-    <span>Belong</span><span class="dot">·</span>
-    <span>Share culture</span><span class="dot">·</span>
-    <span>Be surprised</span><span class="dot">·</span>
-    <span>Cook</span><span class="dot">·</span>
-    <span>Eat</span><span class="dot">·</span>
-    <span>Make things</span><span class="dot">·</span>
-    <span>Grow</span><span class="dot">·</span>
-    <span>Connect</span><span class="dot">·</span>
-    <span>Belong</span><span class="dot">·</span>
-    <span>Share culture</span><span class="dot">·</span>
-    <span>Be surprised</span><span class="dot">·</span>
-  </div>
-</div>
+      <section class="section values-showcase reveal" id="values">
+        <p class="eyebrow">What we stand for</p>
+        <h2 class="section-title">Five words we mean.</h2>
+        <p style="max-width:68ch;margin-top:1.2rem">These aren't aspirations posted on a wall. They're the reason we design every session the way we do — to stretch people just enough, hold them just enough, and get out of the way.</p>
+        <div class="value-orbit">
+          <article class="value-token" style="--r:-2deg"><h3>Growth</h3><p>Real growth — the kind that asks you to try a recipe you've never made in a kitchen you don't own yet.</p></article>
+          <article class="value-token" style="--r:2deg"><h3>Fulfillment</h3><p>The feeling of feeding people something you made with your own hands.</p></article>
+          <article class="value-token" style="--r:-4deg"><h3>Discomfort</h3><p>If something feels a little hard, that's not a flaw in the experience — that's the experience.</p></article>
+          <article class="value-token" style="--r:3deg"><h3>Passion</h3><p>For food. For art. For each other. Passion is contagious and we let it spread.</p></article>
+          <article class="value-token" style="--r:-1deg"><h3>Connection</h3><p>You cannot cook with someone and stay a stranger. We count on that.</p></article>
+        </div>
+      </section>
 
+      <section class="section voices reveal" id="voices">
+        <p class="eyebrow">What people said about the service</p>
+        <h2 class="section-title">It's a lot of things at once.</h2>
+        <div class="feeling-cloud" aria-label="Emotions people describe">
+          <span class="feeling">Growth</span><span class="feeling">Inspired</span><span class="feeling">Connection</span><span class="feeling">Passion</span><span class="feeling">Energized</span><span class="feeling">Fulfillment</span><span class="feeling">Supported</span><span class="feeling">Empowered</span><span class="feeling">a little nervous</span><span class="feeling">belonging</span>
+        </div>
+        <div class="voice-stage">
+          <article class="quote-card q1 drag"><p>“The food is the grounding. What grows from it — the friendships, the skills, the sense that you belong somewhere — that's the whole point.”</p><cite>Starting Point · Seattle WA</cite></article>
+          <article class="quote-card q2 drag"><p>“I walked in not knowing anyone. I left knowing how to make injera from scratch — and with three new friends who actually texted me back.”</p><cite>Community member · Seattle</cite></article>
+          <article class="quote-card q3 drag"><p>We make space for all of it: the discomfort, imposter syndrome, FOMO, and the moment it becomes connection.</p><cite>Service principle</cite></article>
+        </div>
+      </section>
 
-<!-- ABOUT -->
-<section class="about reveal" id="about" aria-labelledby="about-heading">
-  <div class="about-left">
-    <div class="rotated-label" aria-hidden="true">Our mission</div>
-    <div class="about-num" aria-hidden="true">01</div>
-    <p class="about-pull">
-      Food insecurity doesn't mean people need<br/>
-      <strong>less</strong> — it means they've been given less.
-    </p>
-    <p class="about-body">
-      Starting Point starts in the kitchen — but that's never really where it ends. When you cook alongside someone, you share recipes, techniques, stories, and a little bit of yourself. By the time you sit down to eat, something has already shifted.
-    </p>
-    <p class="about-body">
-      After dinner, the space transforms. Instruments come out. Crafts appear. Someone starts a song. Someone else finishes it. <span class="hand-underline">This is what community actually feels like.</span>
-    </p>
-    <div class="tag-cluster" style="margin-top:2rem">
-      <span class="tc tc-r">Cooking sessions</span>
-      <span class="tc tc-o">Shared meals</span>
-      <span class="tc tc-g">Jam sessions</span>
-      <span class="tc tc-r">Craft exchanges</span>
-      <span class="tc tc-o">Art gatherings</span>
-    </div>
-  </div>
+    </section>
 
-  <div class="about-right">
-    <div class="statement-block">
-      <p>"The food is the grounding. What grows from it — the friendships, the skills, the sense that you belong somewhere — that's the whole point."</p>
-      <cite>— Starting Point, Seattle WA</cite>
-    </div>
+    <section id="chefs" class="page">
+      <section class="section chefs-hero">
+        <p class="eyebrow">About our chefs</p><h1 class="section-title">People who lead with flavor, patience, and care.</h1><p style="max-width:64ch;margin-top:1.5rem">Our chefs are community teachers. They bring recipes, stories, techniques, and a way of hosting that makes nervous first-timers feel like regulars.</p>
+        <div class="chef-row">
+          <article class="chef"><div class="avatar">M</div><h3>Marisol Vega</h3><p>Teaches masa, salsas, and the art of making a crowded table feel calm.</p></article>
+          <article class="chef"><div class="avatar">A</div><h3>Amina Noor</h3><p>Leads spice-forward dinners rooted in Somali family recipes and generous storytelling.</p></article>
+          <article class="chef"><div class="avatar">J</div><h3>Jun Park</h3><p>Builds joyful, precise workshops around fermentation, rice, and shared rituals.</p></article>
+          <article class="chef"><div class="avatar">T</div><h3>Talia Brooks</h3><p>Creates plant-forward comfort food nights with accessible techniques for every cook.</p></article>
+        </div>
+      </section>
+      <section class="section split reveal"><div><p class="eyebrow">How they teach</p><h2 class="section-title">No demos from a distance.</h2></div><div class="cards"><article class="card tilt"><div class="num">01</div><h3>Everyone touches the recipe</h3><p>Chopping, stirring, tasting, adjusting, plating. Nobody watches from the sidelines.</p></article><article class="card tilt"><div class="num">02</div><h3>Stories are ingredients</h3><p>Every recipe carries memory, culture, and care. The chefs make room for all of it.</p></article><article class="card tilt"><div class="num">03</div><h3>Confidence over perfection</h3><p>The goal is not restaurant polish. The goal is leaving more capable than you arrived.</p></article></div></section>
+    </section>
 
-    <div class="statement-block" style="background:var(--sage-light);margin-top:1.25rem">
-      <p style="color:var(--sage);font-size:1rem">"I walked in not knowing anyone. I left knowing how to make injera from scratch — and with three new friends who actually texted me back."</p>
-      <cite style="color:rgba(90,110,72,.5)">— Community member, Seattle</cite>
-    </div>
-  </div>
-</section>
+    <section id="volunteer" class="page volunteer">
 
+      <section class="section fundraising reveal" id="fundraising">
+        <p class="eyebrow">Fundraising fundamentals</p>
+        <h2 class="section-title">Free to belong. Funded by people who believe in the table.</h2>
+        <p style="max-width:70ch;margin-top:1.3rem">Starting Point runs on grant funding and donations. Support goes directly toward ingredients, creative materials, free membership, and reaching more of Seattle.</p>
+        <div class="fund-grid">
+          <article class="fund-card tilt"><h3>Ingredients & materials</h3><p>Funds the groceries, pantry staples, craft supplies, and tools that make each session hands-on.</p></article>
+          <article class="fund-card tilt"><h3>Free membership for all</h3><p>Keeps the first visit free and membership free after that — no card, no catch, no tiered belonging.</p></article>
+          <article class="fund-card tilt"><h3>Reach more neighbors</h3><p>Helps us welcome more people across Seattle through transportation, outreach, and volunteer support.</p></article>
+        </div>
+        <div class="impact-meter">
+          <div class="range-row"><input id="impactRange" type="range" min="25" max="500" step="25" value="125" aria-label="Donation amount"><div class="impact-number" id="impactAmount">$125</div></div>
+          <div class="impact-list">
+            <div><strong id="meals">10</strong><p>shared meal seats supported</p></div>
+            <div><strong id="kits">5</strong><p>creative kits funded</p></div>
+            <div><strong id="sessions">1</strong><p>session moments unlocked</p></div>
+          </div>
+        </div>
+      </section>
 
-<!-- HOW IT WORKS -->
-<section class="how reveal" id="how" aria-labelledby="how-heading">
-  <div class="how-header">
-    <div>
-      <p class="how-label">The experience</p>
-      <h2 id="how-heading">What actually <em>happens</em></h2>
-    </div>
-    <p class="how-intro">
-      Every session follows a simple arc — but what unfolds inside that arc is different every time, because the people are.
-    </p>
-  </div>
+      <section class="section form-wrap">
+        <div class="reveal"><p class="eyebrow">Become a volunteer</p><h1 class="section-title">Help make the table bigger.</h1><p style="margin-top:1.5rem">Volunteer as a kitchen helper, welcome host, cleanup lead, musician, artist, driver, translator, or simply another warm person in the room.</p></div>
+        <form class="form reveal" id="volForm">
+          <div class="field"><label for="name">Name</label><input id="name" required placeholder="Your name"></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"></div>
+          <div class="field"><label for="role">I can help with</label><select id="role"><option>Kitchen prep</option><option>Hosting first-timers</option><option>Cleanup crew</option><option>Music or art activity</option><option>Transportation or deliveries</option></select></div>
+          <div class="field"><label for="note">Why are you interested?</label><textarea id="note" placeholder="Tell us a little about you."></textarea></div>
+          <button class="btn primary magnetic" type="submit">Send volunteer interest →</button>
+        </form>
+      </section>
+    </section>
+  </main>
 
-  <div class="steps" role="list">
-    <div class="step" role="listitem">
-      <div class="step-divider" aria-hidden="true"></div>
-      <div class="step-seq" aria-hidden="true">01</div>
-      <span class="step-glyph" aria-hidden="true">🥄</span>
-      <h3>Sleeves up, hands in</h3>
-      <p>You walk into a kitchen, not a waiting room. We cook together — a recipe rooted in someone's culture, shared openly, made by everyone.</p>
-    </div>
-    <div class="step" role="listitem">
-      <div class="step-divider" aria-hidden="true"></div>
-      <div class="step-seq" aria-hidden="true">02</div>
-      <span class="step-glyph" aria-hidden="true">🍽️</span>
-      <h3>Eat what you made</h3>
-      <p>Sit down at the table. The conversation that happens when you've built something together with your own hands — it's different. Easier. More real.</p>
-    </div>
-    <div class="step" role="listitem">
-      <div class="step-divider" aria-hidden="true"></div>
-      <div class="step-seq" aria-hidden="true">03</div>
-      <span class="step-glyph" aria-hidden="true">🎶</span>
-      <h3>The space transforms</h3>
-      <p>After dinner, something shifts. Instruments appear. Crafts come out. Art happens. Whatever the evening calls for — music, making, moving — you belong here.</p>
-    </div>
-    <div class="step" role="listitem">
-      <div class="step-seq" aria-hidden="true">04</div>
-      <span class="step-glyph" aria-hidden="true">🌱</span>
-      <h3>Come back</h3>
-      <p>Your first session is free. Always. After that, membership costs nothing — just your presence. Stay, grow, bring someone with you next time.</p>
-    </div>
-  </div>
-</section>
+  <div class="progress-ring" aria-hidden="true"></div>
+  <div class="modal" id="modal"><div class="modal-card"><button class="close" id="closeModal">×</button><span class="tag" id="modalTag">session</span><h3 id="modalTitle"></h3><p id="modalDesc"></p></div></div>
+  <div class="event-pop" id="eventPop"><div class="event-card"><button class="event-close" id="eventClose">×</button><span class="tag" id="eventTag"></span><h3 id="eventTitle"></h3><p id="eventDesc"></p></div></div>
+  <div class="toast" id="toast">Thanks — your volunteer interest has been captured in this prototype.</div>
+  <footer><strong>Starting Point</strong><span>Interactive community website · Seattle, WA</span></footer>
 
+  <script>
+    const $ = (s, p=document) => p.querySelector(s);
+    const $$ = (s, p=document) => [...p.querySelectorAll(s)];
 
-<!-- FEELINGS -->
-<section class="feelings reveal" aria-labelledby="feelings-heading">
-  <div class="feelings-header">
-    <p class="feelings-label">What people tell us</p>
-    <h2 id="feelings-heading">
-      It's a lot of things<br/>
-      <strong>at once.</strong>
-    </h2>
-  </div>
+    window.addEventListener('load',()=>setTimeout(()=>$('.loader').classList.add('hide'),900));
 
-  <div class="word-field" aria-label="Emotions and experiences people describe at Starting Point" role="list">
-    <span class="word w1"  role="listitem">Growth</span>
-    <span class="word w2"  role="listitem">a little nervous</span>
-    <span class="word w3"  role="listitem">Inspired</span>
-    <span class="word w4"  role="listitem">imposter syndrome</span>
-    <span class="word w5"  role="listitem">Connection</span>
-    <span class="word w6"  role="listitem">stressed (then okay)</span>
-    <span class="word w7"  role="listitem">Passion</span>
-    <span class="word w8"  role="listitem">challenged</span>
-    <span class="word w9"  role="listitem">Energized</span>
-    <span class="word w10" role="listitem">FOMO → showing up</span>
-    <span class="word w11" role="listitem">Fulfillment</span>
-    <span class="word w12" role="listitem">discomfort</span>
-    <span class="word w13" role="listitem">Supported</span>
-    <span class="word w14" role="listitem">belonging</span>
-    <span class="word w15" role="listitem">Empowered</span>
-  </div>
+    const cursor=$('.cursor');
+    window.addEventListener('pointermove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
+    $$('a,button,.card,.drag,.chef,.project,.quote-card,.value-token,.phase-tab,.photo-card,.phase-panel,.phase-bounce-card').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hot'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hot'))});
 
-  <p class="feelings-note">
-    We make space for all of it. You don't have to arrive ready. The discomfort, the imposter syndrome, the FOMO you pushed past to get here — those are part of the experience, not obstacles to it.
-  </p>
-</section>
+    function showPage(id){$$('.page').forEach(p=>p.classList.toggle('active',p.id===id));$$('[data-page]').forEach(a=>a.classList.toggle('active',a.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});revealNow()}
+    $$('[data-page]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();history.pushState(null,'','#'+a.dataset.page);showPage(a.dataset.page)}));
+    window.addEventListener('popstate',()=>showPage(location.hash.replace('#','')||'home'));
+    if(location.hash) showPage(location.hash.replace('#',''));
 
+    const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+    function revealNow(){$$('.reveal').forEach(el=>io.observe(el))} revealNow();
 
-<!-- VALUES -->
-<section class="values reveal" id="values" aria-labelledby="values-heading">
-  <div class="values-top">
-    <div>
-      <p class="values-label">What we stand for</p>
-      <h2 id="values-heading">Five words<br/>we mean.</h2>
-    </div>
-    <p class="values-intro">
-      These aren't aspirations posted on a wall. They're the reason we design every session the way we do — to stretch people just enough, hold them just enough, and get out of the way.
-    </p>
-  </div>
+    $$('.drag').forEach(el=>{
+      let startX=0,startY=0,baseX=0,baseY=0,drag=false;
+      el.addEventListener('pointerdown',e=>{drag=true;el.classList.add('dragging');el.setPointerCapture(e.pointerId);startX=e.clientX-baseX;startY=e.clientY-baseY});
+      el.addEventListener('pointermove',e=>{if(!drag)return;baseX=e.clientX-startX;baseY=e.clientY-startY;el.style.translate=baseX+'px '+baseY+'px'});
+      el.addEventListener('pointerup',()=>{drag=false;el.classList.remove('dragging')});
+    });
 
-  <div class="values-grid" role="list">
-    <div class="value-card" role="listitem">
-      <span class="value-glyph" aria-hidden="true">🌱</span>
-      <h3>Growth</h3>
-      <p>Not comfortable growth. Real growth — the kind that requires you to try a recipe you've never made in a kitchen you don't own yet.</p>
-    </div>
-    <div class="value-card" role="listitem">
-      <span class="value-glyph" aria-hidden="true">✦</span>
-      <h3>Fulfillment</h3>
-      <p>The feeling of feeding people something you made with your own hands. That's not small. We want everyone to know it.</p>
-    </div>
-    <div class="value-card" role="listitem">
-      <span class="value-glyph" aria-hidden="true">🌊</span>
-      <h3>Discomfort</h3>
-      <p>We design for stretch. If something feels a little hard, that's not a flaw in the experience — that's the experience.</p>
-    </div>
-    <div class="value-card" role="listitem">
-      <span class="value-glyph" aria-hidden="true">🔥</span>
-      <h3>Passion</h3>
-      <p>For food. For art. For each other. Passion is contagious and we let it spread freely.</p>
-    </div>
-    <div class="value-card" role="listitem">
-      <span class="value-glyph" aria-hidden="true">🤝</span>
-      <h3>Connection</h3>
-      <p>You cannot cook with someone and stay a stranger. It's almost impossible. We count on that.</p>
-    </div>
-  </div>
-</section>
+    $$('.tilt').forEach(card=>{
+      card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`rotateX(${-y*7}deg) rotateY(${x*7}deg) translateY(-4px)`});
+      card.addEventListener('pointerleave',()=>card.style.transform='');
+    });
 
+    $$('.chip').forEach(chip=>chip.addEventListener('click',()=>{const f=chip.dataset.filter;$$('.chip').forEach(c=>c.classList.remove('active'));chip.classList.add('active');$$('.project').forEach(p=>p.style.display=(f==='all'||p.dataset.kind===f)?'block':'none')}));
 
-<!-- MEMBERSHIP -->
-<section class="membership reveal" id="membership" aria-labelledby="mem-heading">
-  <p class="membership-label">Access &amp; Membership</p>
-  <h2 id="mem-heading">
-    Open doors.<br/><strong>Free to all.</strong>
-  </h2>
-  <p class="membership-sub">
-    We will never charge anyone to belong here. Your first session is on us — walk in, cook, eat, make art. No card. No catch. After that, membership is required (it keeps our community intentional) but it's always free.
-  </p>
-
-  <div class="mem-grid">
-    <div class="mem-card mc-free">
-      <span class="mc-tag">First visit</span>
-      <div class="mc-price">Free.</div>
-      <p class="mc-qualifier">No card. No obligation. Just show up.</p>
-      <p class="mc-body">Your very first session is completely on the house. Cook, eat, stay for the creative gathering — all of it, no cost, no strings.</p>
-      <ul class="mc-list">
-        <li><span class="mc-bullet">✦</span> Full cooking session</li>
-        <li><span class="mc-bullet">✦</span> Shared meal with the community</li>
-        <li><span class="mc-bullet">✦</span> Evening creative gathering</li>
-        <li><span class="mc-bullet">✦</span> Decide from there</li>
-      </ul>
-    </div>
-
-    <div class="mem-card mc-member">
-      <span class="mc-tag">Membership</span>
-      <div class="mc-price">Free.</div>
-      <p class="mc-qualifier">Always. Not a trial, not a tier.</p>
-      <p class="mc-body">After your first visit, membership keeps things intentional. It's always free — it just means you're part of this, and this is part of you.</p>
-      <ul class="mc-list">
-        <li><span class="mc-bullet">✦</span> Unlimited sessions</li>
-        <li><span class="mc-bullet">✦</span> Early access to new events</li>
-        <li><span class="mc-bullet">✦</span> Contribute recipes &amp; skills</li>
-        <li><span class="mc-bullet">✦</span> Help shape what we become</li>
-      </ul>
-    </div>
-
-    <div class="mem-card mc-donate">
-      <span class="mc-tag">Support the space</span>
-      <div class="mc-price">Donate if you can.</div>
-      <p class="mc-qualifier">Grants + community generosity keep us going.</p>
-      <p class="mc-body">Starting Point runs on grant funding and donations from people who believe in this. If you're in a position to give, it directly keeps these doors open for people who need them.</p>
-      <ul class="mc-list">
-        <li><span class="mc-bullet">✦</span> Funds ingredients &amp; materials</li>
-        <li><span class="mc-bullet">✦</span> Supports free membership for all</li>
-        <li><span class="mc-bullet">✦</span> Helps us reach more of Seattle</li>
-      </ul>
-    </div>
-  </div>
-
-  <p class="mem-footer">
-    Funded by grants and community donations. Questions? <a href="mailto:hello@startingpointseattle.org">Get in touch</a>.
-  </p>
-</section>
+    $$('.project').forEach(p=>p.addEventListener('click',()=>{$('#modalTitle').textContent=p.dataset.title;$('#modalDesc').textContent=p.dataset.desc;$('#modalTag').textContent=p.dataset.kind;$('#modal').classList.add('show')}));
+    $('#closeModal').addEventListener('click',()=>$('#modal').classList.remove('show'));
+    $('#modal').addEventListener('click',e=>{if(e.target.id==='modal')$('#modal').classList.remove('show')});
 
 
-<!-- BIG CTA -->
-<div class="cta reveal" id="join" role="region" aria-labelledby="cta-heading">
-  <div>
-    <h2 id="cta-heading">
-      Your first session<br/>is <strong>waiting for you.</strong>
-    </h2>
-    <p class="cta-sub">Show up. Cook something. Eat together. See what happens. There's no wrong way to start — that's the whole point.</p>
-  </div>
-  <div class="cta-right">
-    <a href="#" class="btn-white">Reserve my free session →</a>
-    <a href="mailto:hello@startingpointseattle.org" class="btn-ghost-white">Or just say hello</a>
-  </div>
-</div>
+    $$('.photo-card').forEach(card=>{
+      card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')});
+      card.addEventListener('click',()=>{ $('#eventTitle').textContent=card.dataset.title; $('#eventTag').textContent=card.dataset.tag; $('#eventDesc').textContent=card.dataset.desc; $('#eventPop').classList.add('show') });
+    });
+    $('#eventClose')?.addEventListener('click',()=>$('#eventPop').classList.remove('show'));
+    $('#eventPop')?.addEventListener('click',e=>{if(e.target.id==='eventPop')$('#eventPop').classList.remove('show')});
 
-
-<!-- FOOTER -->
-<footer>
-  <!--
-    WORDMARK: Replace .footer-wm with your wordmark image:
-    <img src="wordmark.svg" alt="Starting Point" style="height:26px;opacity:.7">
-  -->
-  <div class="footer-wm" aria-label="Starting Point wordmark placeholder">Your Wordmark</div>
-  <ul class="footer-links" aria-label="Footer links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#how">Sessions</a></li>
-    <li><a href="#membership">Membership</a></li>
-    <li><a href="mailto:hello@startingpointseattle.org">Contact</a></li>
-  </ul>
-  <p class="footer-copy">© 2025 Starting Point · Seattle, WA</p>
-</footer>
-
-
-<script>
-// Scroll reveal
-const observer = new IntersectionObserver(
-  entries => entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.classList.add('visible');
-      observer.unobserve(e.target);
+    const parallaxLayers=$$('.para-layer,.float-mark');
+    const phasePanels=$$('.phase-panel,.phase-bounce-card');
+    function updateParallax(){
+      const scene=$('.parallax-scene') || $('.phase-horizontal-wrap');
+      if(scene){const rect=scene.getBoundingClientRect();const center=(innerHeight/2-rect.top)/Math.max(rect.height,1)-.5;parallaxLayers.forEach(layer=>{const speed=parseFloat(layer.dataset.speed||'.1');layer.style.translate='0 '+(center*220*speed)+'px'});}
+      phasePanels.forEach(panel=>{const r=panel.getBoundingClientRect();const active=r.top<innerHeight*.58 && r.bottom>innerHeight*.32;panel.classList.toggle('is-active',active)});
     }
-  }),
-  { threshold: 0.08 }
-);
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    addEventListener('scroll',updateParallax,{passive:true}); updateParallax();
 
-// Stagger feeling words on viewport entry
-const wordField = document.querySelector('.word-field');
-if(wordField){
-  const wordObs = new IntersectionObserver(entries => {
-    if(entries[0].isIntersecting){
-      document.querySelectorAll('.word').forEach((w,i) => {
-        w.style.transitionDelay = (i*45)+'ms';
-        w.style.opacity = '0.85';
-        w.style.transform = w.style.transform || '';
-      });
-      wordObs.disconnect();
+
+    const phaseCards = $$('[data-phase-card]');
+    const phaseTabs = $$('.phase-tab');
+    if(phaseCards.length){
+      const phaseObserver = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const i = phaseCards.indexOf(entry.target);
+            phaseTabs.forEach((tab,idx)=>tab.classList.toggle('active',idx===i));
+          }
+        })
+      },{threshold:.55});
+      phaseCards.forEach(card=>phaseObserver.observe(card));
+      phaseTabs.forEach(tab=>tab.addEventListener('click',()=>phaseCards[+tab.dataset.phase].scrollIntoView({behavior:'smooth',block:'center'})));
     }
-  },{ threshold:0.1 });
-  // set initial state
-  document.querySelectorAll('.word').forEach(w => {
-    w.style.opacity='0';
-    w.style.transition='opacity .5s ease, transform .2s ease';
-  });
-  wordObs.observe(wordField);
-}
-</script>
+
+    function updateProgress(){
+      const max=document.documentElement.scrollHeight-innerHeight;
+      const pct=max>0?scrollY/max:0;
+      $('.progress-ring').style.background=`conic-gradient(var(--rust) ${pct*360}deg, rgba(184,74,26,.16) 0deg)`;
+    }
+    addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
+
+    const impactRange=$('#impactRange');
+    if(impactRange){
+      const updateImpact=()=>{
+        const v=+impactRange.value;
+        $('#impactAmount').textContent='$'+v;
+        $('#meals').textContent=Math.round(v/12);
+        $('#kits').textContent=Math.round(v/25);
+        $('#sessions').textContent=Math.max(1,Math.round(v/100));
+      };
+      impactRange.addEventListener('input',updateImpact); updateImpact();
+    }
+
+    $('#volForm').addEventListener('submit',e=>{e.preventDefault();$('#toast').classList.add('show');setTimeout(()=>$('#toast').classList.remove('show'),3200);e.target.reset()});
+  </script>
 </body>
 </html>
