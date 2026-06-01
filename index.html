@@ -383,6 +383,185 @@
       .quote-card.drag:hover{transform:none!important}
     }
 
+
+
+    /* Hero draggable video card */
+    .video-drag-card{
+      padding:0!important;
+      overflow:hidden;
+      background:var(--ink)!important;
+      color:var(--cream)!important;
+      display:block!important;
+      border:1px solid rgba(255,255,255,.34);
+      isolation:isolate;
+    }
+    .video-drag-card.b1{
+      width:300px;
+      height:390px;
+      border-radius:42px 22px 42px 22px;
+    }
+    .drag-video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.03);
+      pointer-events:none;
+      filter:saturate(1.08) contrast(1.03);
+    }
+    .video-card-gradient{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg,rgba(30,18,8,.18),transparent 36%,rgba(30,18,8,.72)),
+        radial-gradient(circle at 28% 18%,rgba(232,200,122,.22),transparent 34%);
+      pointer-events:none;
+      z-index:1;
+    }
+    .video-card-actions{
+      position:absolute;
+      top:.85rem;
+      right:.85rem;
+      z-index:5;
+      display:flex;
+      gap:.45rem;
+      align-items:center;
+    }
+    .video-action{
+      width:40px;
+      height:40px;
+      border:1px solid rgba(250,246,238,.34);
+      border-radius:999px;
+      background:rgba(30,18,8,.42);
+      color:var(--cream);
+      display:grid;
+      place-items:center;
+      backdrop-filter:blur(14px);
+      box-shadow:0 14px 34px rgba(30,18,8,.18);
+      transition:transform .32s cubic-bezier(.16,1,.3,1),background .32s ease,border-color .32s ease,box-shadow .32s ease;
+      cursor:none;
+    }
+    .video-action:hover{
+      transform:translateY(-2px) scale(1.04);
+      background:rgba(250,246,238,.9);
+      color:var(--rust);
+      border-color:rgba(250,246,238,.72);
+      box-shadow:0 18px 44px rgba(30,18,8,.22);
+    }
+    .video-action svg{
+      width:19px;
+      height:19px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .sound-toggle .icon-sound-on{display:none}
+    .sound-toggle.is-on .icon-sound-off{display:none}
+    .sound-toggle.is-on .icon-sound-on{display:block}
+    .video-card-caption{
+      position:absolute;
+      left:1.05rem;
+      right:1.05rem;
+      bottom:1.05rem;
+      z-index:2;
+      text-align:left;
+      color:var(--cream);
+      pointer-events:none;
+    }
+    .video-card-caption strong{
+      display:block;
+      font:700 clamp(1.7rem,3vw,2.35rem)/.88 'Plus Jakarta Sans';
+      letter-spacing:-.07em;
+      text-shadow:0 8px 26px rgba(30,18,8,.42);
+    }
+    .video-card-caption small{
+      display:inline-flex;
+      margin-top:.55rem;
+      padding:.45rem .68rem;
+      border-radius:999px;
+      background:rgba(250,246,238,.16);
+      border:1px solid rgba(250,246,238,.2);
+      backdrop-filter:blur(12px);
+      font:400 .68rem 'Plus Jakarta Sans';
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(250,246,238,.82);
+    }
+    .video-lightbox{
+      position:fixed;
+      inset:0;
+      z-index:3000;
+      display:none;
+      place-items:center;
+      padding:1.2rem;
+      background:rgba(30,18,8,.64);
+      backdrop-filter:blur(14px);
+    }
+    .video-lightbox.show{display:grid}
+    .video-lightbox-card{
+      width:min(860px,94vw);
+      aspect-ratio:16/10;
+      max-height:82vh;
+      position:relative;
+      border-radius:36px;
+      overflow:hidden;
+      background:var(--ink);
+      border:1px solid rgba(250,246,238,.18);
+      box-shadow:0 38px 110px rgba(0,0,0,.38);
+      animation:videoLightboxIn .34s cubic-bezier(.16,1,.3,1) both;
+    }
+    .video-lightbox-card video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      background:var(--ink);
+    }
+    .video-close{
+      position:absolute;
+      top:1rem;
+      right:1rem;
+      z-index:2;
+      width:44px;
+      height:44px;
+      border:1px solid rgba(250,246,238,.3);
+      border-radius:999px;
+      background:rgba(30,18,8,.54);
+      color:var(--cream);
+      font-size:1.35rem;
+      backdrop-filter:blur(12px);
+      transition:transform .24s ease,background .24s ease;
+      cursor:none;
+    }
+    .video-close:hover{transform:scale(1.04);background:rgba(184,74,26,.92)}
+    @keyframes videoLightboxIn{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}
+    @media(max-width:560px){.video-drag-card.b1{width:260px;height:340px}.video-action{width:36px;height:36px}.video-lightbox-card{aspect-ratio:9/14}}
+
+
+.nav-progress{
+position:fixed;
+top:34px;
+left:50%;
+transform:translateX(-50%);
+width:min(280px,30vw);
+height:3px;
+border-radius:999px;
+background:rgba(30,18,8,.08);
+overflow:hidden;
+z-index:950;
+}
+.nav-progress-fill{
+height:100%;
+width:0%;
+border-radius:999px;
+background:linear-gradient(90deg,var(--straw),var(--ember),var(--rust));
+transition:width .12s linear;
+}
+
 </style>
 </head>
 <body>
@@ -408,7 +587,23 @@
           <div class="btns"><a class="btn primary magnetic" href="#volunteer" data-page="volunteer">Become a volunteer →</a><a class="btn secondary magnetic" href="#chefs" data-page="chefs">Meet the chefs</a></div>
         </div>
         <div class="hero-stage" aria-label="Draggable interaction cards">
-          <div class="blob drag b1"><div><strong>drag me</strong><small>interaction card</small></div></div>
+          <div class="blob drag b1 video-drag-card" aria-label="Draggable video card">
+            <video class="drag-video" id="heroDragVideo" src="Untitled design.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <div class="video-card-gradient" aria-hidden="true"></div>
+            <div class="video-card-actions" aria-label="Video controls">
+              <button class="video-action sound-toggle" type="button" aria-label="Turn video sound on" aria-pressed="false">
+                <svg class="icon-sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h4l5 4.5v-14L8 9.5H4Z"/><path d="M17 9l4 4m0-4l-4 4"/></svg>
+                <svg class="icon-sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h4l5 4.5v-14L8 9.5H4Z"/><path d="M17 8.5c1.2 1.1 1.8 2.3 1.8 3.5s-.6 2.4-1.8 3.5"/><path d="M19.5 6c1.8 1.8 2.7 3.8 2.7 6s-.9 4.2-2.7 6"/></svg>
+              </button>
+              <button class="video-action expand-video" type="button" aria-label="View video larger">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 4H4v4.5M15.5 4H20v4.5M20 15.5V20h-4.5M4 15.5V20h4.5"/><path d="M9 4L4 9m11-5 5 5m0 6-5 5M9 20l-5-5"/></svg>
+              </button>
+            </div>
+            <div class="video-card-caption">
+              <strong>inside the room</strong>
+              <small>drag · listen · expand</small>
+            </div>
+          </div>
           <div class="blob drag b2"><div><strong>cook</strong><small>hands-on sessions</small></div></div>
           <div class="blob drag b3"><div><strong>share</strong><small>recipes + stories</small></div></div>
           <div class="blob drag b4"><div><strong>stay</strong><small>music after dinner</small></div></div>
@@ -579,9 +774,9 @@
     </section>
   </main>
 
-  <div class="progress-ring" aria-hidden="true"><span class="progress-label">Progress</span><div class="progress-track"><span class="progress-fill"></span><span class="progress-spark"></span></div><span class="progress-percent">0%</span></div>
-  <div class="modal" id="modal"><div class="modal-card"><button class="close" id="closeModal">×</button><span class="tag" id="modalTag">session</span><h3 id="modalTitle"></h3><p id="modalDesc"></p></div></div>
+  <div class="nav-progress"><div class="nav-progress-fill"></div></div><div class="modal" id="modal"><div class="modal-card"><button class="close" id="closeModal">×</button><span class="tag" id="modalTag">session</span><h3 id="modalTitle"></h3><p id="modalDesc"></p></div></div>
   <div class="event-pop" id="eventPop"><div class="event-card"><button class="event-close" id="eventClose">×</button><span class="tag" id="eventTag"></span><h3 id="eventTitle"></h3><p id="eventDesc"></p></div></div>
+  <div class="video-lightbox" id="videoLightbox" aria-hidden="true"><div class="video-lightbox-card"><button class="video-close" id="videoClose" type="button" aria-label="Close video">×</button><video id="largeHeroVideo" src="Untitled design.mp4" controls playsinline></video></div></div>
   <div class="toast" id="toast">Thanks — your volunteer interest has been captured in this prototype.</div>
   <footer><strong>Starting Point</strong><span>Interactive community website · Seattle, WA</span></footer>
 
@@ -705,14 +900,10 @@
     }
 
     function updateProgress(){
-      const max=document.documentElement.scrollHeight-innerHeight;
-      const pct=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
-      const ring=$('.progress-ring');
-      const fill=$('.progress-fill');
-      const percent=$('.progress-percent');
-      if(ring) ring.style.setProperty('--scroll-progress',pct);
-      if(fill) fill.style.width=(pct*100).toFixed(1)+'%';
-      if(percent) percent.textContent=Math.round(pct*100)+'%';
+      const max=document.documentElement.scrollHeight-window.innerHeight;
+      const pct=max>0?Math.min(1,Math.max(0,window.scrollY/max)):0;
+      const fill=document.querySelector('.nav-progress-fill');
+      if(fill) fill.style.width=(pct*100)+'%';
     }
     addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
 
@@ -727,6 +918,59 @@
       };
       impactRange.addEventListener('input',updateImpact); updateImpact();
     }
+
+
+
+    const heroDragVideo = $('#heroDragVideo');
+    const soundToggle = $('.sound-toggle');
+    const expandVideo = $('.expand-video');
+    const videoLightbox = $('#videoLightbox');
+    const largeHeroVideo = $('#largeHeroVideo');
+    const videoClose = $('#videoClose');
+
+    $$('.video-action').forEach(btn=>{
+      btn.addEventListener('pointerdown',e=>e.stopPropagation());
+      btn.addEventListener('click',e=>e.stopPropagation());
+    });
+
+    function syncSoundState(isOn){
+      if(heroDragVideo) heroDragVideo.muted = !isOn;
+      if(largeHeroVideo) largeHeroVideo.muted = !isOn;
+      if(soundToggle){
+        soundToggle.classList.toggle('is-on',isOn);
+        soundToggle.setAttribute('aria-pressed',String(isOn));
+        soundToggle.setAttribute('aria-label',isOn ? 'Turn video sound off' : 'Turn video sound on');
+      }
+    }
+
+    soundToggle?.addEventListener('click',()=>{
+      const shouldTurnOn = heroDragVideo ? heroDragVideo.muted : true;
+      syncSoundState(shouldTurnOn);
+      heroDragVideo?.play().catch(()=>{});
+    });
+
+    expandVideo?.addEventListener('click',()=>{
+      if(!videoLightbox || !largeHeroVideo) return;
+      videoLightbox.classList.add('show');
+      videoLightbox.setAttribute('aria-hidden','false');
+      if(heroDragVideo){
+        largeHeroVideo.currentTime = heroDragVideo.currentTime || 0;
+        largeHeroVideo.muted = heroDragVideo.muted;
+      }
+      largeHeroVideo.play().catch(()=>{});
+    });
+
+    function closeLargeVideo(){
+      if(!videoLightbox || !largeHeroVideo) return;
+      if(heroDragVideo) heroDragVideo.currentTime = largeHeroVideo.currentTime || heroDragVideo.currentTime;
+      largeHeroVideo.pause();
+      videoLightbox.classList.remove('show');
+      videoLightbox.setAttribute('aria-hidden','true');
+    }
+    videoClose?.addEventListener('click',closeLargeVideo);
+    videoLightbox?.addEventListener('click',e=>{if(e.target===videoLightbox) closeLargeVideo()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape') closeLargeVideo()});
+
 
     $('#volForm').addEventListener('submit',e=>{e.preventDefault();$('#toast').classList.add('show');setTimeout(()=>$('#toast').classList.remove('show'),3200);e.target.reset()});
   </script>
